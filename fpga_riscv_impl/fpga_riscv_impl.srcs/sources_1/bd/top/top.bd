@@ -1,0 +1,423 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x256EB79351BBCB73",
+      "device": "xc7a100tcsg324-1",
+      "gen_directory": "../../../../fpga_riscv_impl.gen/sources_1/bd/top",
+      "name": "top",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.1.1",
+      "validated": "true"
+    },
+    "design_tree": {
+      "clk_wiz_0": "",
+      "Prog_stop_addr": "",
+      "Prog_start_addr": "",
+      "blk_mem_gen_0": "",
+      "equal_0": "",
+      "equal_1": "",
+      "debouncer_0": "",
+      "processor_0": ""
+    },
+    "ports": {
+      "CLK_100Mhz": {
+        "direction": "I"
+      },
+      "RESET": {
+        "direction": "I"
+      },
+      "DONE": {
+        "direction": "O",
+        "left": "0",
+        "right": "0"
+      },
+      "START": {
+        "direction": "O",
+        "left": "0",
+        "right": "0"
+      },
+      "ERROR": {
+        "direction": "O",
+        "left": "0",
+        "right": "0",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default_prop"
+          }
+        }
+      },
+      "LED0": {
+        "direction": "O"
+      }
+    },
+    "components": {
+      "clk_wiz_0": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "xci_name": "top_clk_wiz_0_0",
+        "xci_path": "ip\\top_clk_wiz_0_0\\top_clk_wiz_0_0.xci",
+        "inst_hier_path": "clk_wiz_0",
+        "parameters": {
+          "CLKFB_IN_SIGNALING": {
+            "value": "SINGLE"
+          },
+          "CLKOUT2_JITTER": {
+            "value": "151.636"
+          },
+          "CLKOUT2_PHASE_ERROR": {
+            "value": "98.575"
+          },
+          "CLKOUT2_REQUESTED_OUT_FREQ": {
+            "value": "50"
+          },
+          "CLKOUT2_USED": {
+            "value": "false"
+          },
+          "FEEDBACK_SOURCE": {
+            "value": "FDBK_AUTO"
+          },
+          "MMCM_CLKOUT1_DIVIDE": {
+            "value": "1"
+          },
+          "MMCM_COMPENSATION": {
+            "value": "ZHOLD"
+          },
+          "NUM_OUT_CLKS": {
+            "value": "1"
+          },
+          "USE_LOCKED": {
+            "value": "false"
+          },
+          "USE_POWER_DOWN": {
+            "value": "false"
+          },
+          "USE_RESET": {
+            "value": "false"
+          }
+        }
+      },
+      "Prog_stop_addr": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "top_xlconstant_0_0",
+        "xci_path": "ip\\top_xlconstant_0_0\\top_xlconstant_0_0.xci",
+        "inst_hier_path": "Prog_stop_addr",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0x200"
+          },
+          "CONST_WIDTH": {
+            "value": "32"
+          }
+        }
+      },
+      "Prog_start_addr": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "top_xlconstant_1_0",
+        "xci_path": "ip\\top_xlconstant_1_0\\top_xlconstant_1_0.xci",
+        "inst_hier_path": "Prog_start_addr",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0x100"
+          },
+          "CONST_WIDTH": {
+            "value": "32"
+          }
+        }
+      },
+      "blk_mem_gen_0": {
+        "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
+        "xci_name": "top_blk_mem_gen_0_0",
+        "xci_path": "ip\\top_blk_mem_gen_0_0\\top_blk_mem_gen_0_0.xci",
+        "inst_hier_path": "blk_mem_gen_0",
+        "parameters": {
+          "Coe_File": {
+            "value": "../../../../../../../benchmark_coe/dry2.coe"
+          },
+          "Collision_Warnings": {
+            "value": "ALL"
+          },
+          "Fill_Remaining_Memory_Locations": {
+            "value": "true"
+          },
+          "Load_Init_File": {
+            "value": "true"
+          },
+          "Register_PortA_Output_of_Memory_Primitives": {
+            "value": "false"
+          },
+          "Write_Depth_A": {
+            "value": "102400"
+          },
+          "use_bram_block": {
+            "value": "Stand_Alone"
+          }
+        }
+      },
+      "equal_0": {
+        "vlnv": "xilinx.com:module_ref:equal:1.0",
+        "xci_name": "top_equal_0_0",
+        "xci_path": "ip\\top_equal_0_0\\top_equal_0_0.xci",
+        "inst_hier_path": "equal_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "equal",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "a": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "b": {
+            "direction": "I",
+            "left": "31",
+            "right": "0",
+            "parameters": {
+              "LAYERED_METADATA": {
+                "value": "undef",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "z": {
+            "direction": "O"
+          }
+        }
+      },
+      "equal_1": {
+        "vlnv": "xilinx.com:module_ref:equal:1.0",
+        "xci_name": "top_equal_1_0",
+        "xci_path": "ip\\top_equal_1_0\\top_equal_1_0.xci",
+        "inst_hier_path": "equal_1",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "equal",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "a": {
+            "direction": "I",
+            "left": "31",
+            "right": "0",
+            "parameters": {
+              "LAYERED_METADATA": {
+                "value": "undef",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "b": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "z": {
+            "direction": "O"
+          }
+        }
+      },
+      "debouncer_0": {
+        "vlnv": "xilinx.com:module_ref:debouncer:1.0",
+        "xci_name": "top_debouncer_0_0",
+        "xci_path": "ip\\top_debouncer_0_0\\top_debouncer_0_0.xci",
+        "inst_hier_path": "debouncer_0",
+        "parameters": {
+          "MAX_COUNT": {
+            "value": "1000000"
+          }
+        },
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "debouncer",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "ip_prop"
+              },
+              "PHASE": {
+                "value": "0.0",
+                "value_src": "ip_prop"
+              },
+              "CLK_DOMAIN": {
+                "value": "/clk_wiz_0_clk_out1",
+                "value_src": "ip_prop"
+              }
+            }
+          },
+          "in_pin": {
+            "direction": "I"
+          },
+          "out_pin": {
+            "direction": "O"
+          }
+        }
+      },
+      "processor_0": {
+        "vlnv": "TJ:hls:processor:1.0",
+        "xci_name": "top_processor_0_0",
+        "xci_path": "ip\\top_processor_0_0\\top_processor_0_0.xci",
+        "inst_hier_path": "processor_0"
+      }
+    },
+    "nets": {
+      "CLK_100Mhz_1": {
+        "ports": [
+          "CLK_100Mhz",
+          "clk_wiz_0/clk_in1"
+        ]
+      },
+      "RESET_1": {
+        "ports": [
+          "RESET",
+          "debouncer_0/in_pin"
+        ]
+      },
+      "blk_mem_gen_0_douta": {
+        "ports": [
+          "blk_mem_gen_0/douta",
+          "processor_0/memory_q0"
+        ]
+      },
+      "clk_wiz_0_clk_out1": {
+        "ports": [
+          "clk_wiz_0/clk_out1",
+          "blk_mem_gen_0/clka",
+          "equal_1/clk",
+          "equal_0/clk",
+          "debouncer_0/clk",
+          "processor_0/ap_clk"
+        ]
+      },
+      "debouncer_0_out_pin": {
+        "ports": [
+          "debouncer_0/out_pin",
+          "equal_1/rst",
+          "equal_0/rst",
+          "LED0",
+          "processor_0/ap_rst"
+        ]
+      },
+      "equal_0_z": {
+        "ports": [
+          "equal_0/z",
+          "DONE"
+        ]
+      },
+      "equal_1_z": {
+        "ports": [
+          "equal_1/z",
+          "START"
+        ]
+      },
+      "processor_0_ap_return": {
+        "ports": [
+          "processor_0/pc",
+          "equal_0/b",
+          "equal_1/a"
+        ]
+      },
+      "processor_0_error": {
+        "ports": [
+          "processor_0/error",
+          "ERROR"
+        ]
+      },
+      "processor_0_memory_address0": {
+        "ports": [
+          "processor_0/memory_address0",
+          "blk_mem_gen_0/addra"
+        ]
+      },
+      "processor_0_memory_ce0": {
+        "ports": [
+          "processor_0/memory_ce0",
+          "blk_mem_gen_0/ena"
+        ]
+      },
+      "processor_0_memory_d0": {
+        "ports": [
+          "processor_0/memory_d0",
+          "blk_mem_gen_0/dina"
+        ]
+      },
+      "processor_0_memory_we0": {
+        "ports": [
+          "processor_0/memory_we0",
+          "blk_mem_gen_0/wea"
+        ]
+      },
+      "xlconstant_0_dout": {
+        "ports": [
+          "Prog_stop_addr/dout",
+          "equal_0/a"
+        ]
+      },
+      "xlconstant_1_dout": {
+        "ports": [
+          "Prog_start_addr/dout",
+          "equal_1/b"
+        ]
+      }
+    }
+  }
+}

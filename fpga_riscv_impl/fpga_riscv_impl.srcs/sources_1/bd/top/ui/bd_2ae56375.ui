@@ -1,0 +1,44 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"1.0",
+   "Default View_TopLeft":"-510,-103",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0
+#  -string -flagsOSRD
+preplace port port-id_CLK_100Mhz -pg 1 -lvl 0 -x -10 -y 190 -defaultsOSRD
+preplace port port-id_RESET -pg 1 -lvl 0 -x -10 -y 420 -defaultsOSRD
+preplace port port-id_LED0 -pg 1 -lvl 4 -x 860 -y 340 -defaultsOSRD
+preplace portBus DONE -pg 1 -lvl 4 -x 860 -y 550 -defaultsOSRD
+preplace portBus START -pg 1 -lvl 4 -x 860 -y 710 -defaultsOSRD
+preplace portBus ERROR -pg 1 -lvl 4 -x 860 -y 240 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 110 -y 190 -defaultsOSRD
+preplace inst Prog_stop_addr -pg 1 -lvl 2 -x 420 -y 520 -defaultsOSRD
+preplace inst Prog_start_addr -pg 1 -lvl 2 -x 420 -y 700 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 3 -x 740 -y 120 -defaultsOSRD
+preplace inst equal_0 -pg 1 -lvl 3 -x 740 -y 550 -defaultsOSRD
+preplace inst equal_1 -pg 1 -lvl 3 -x 740 -y 710 -defaultsOSRD
+preplace inst debouncer_0 -pg 1 -lvl 2 -x 420 -y 410 -defaultsOSRD
+preplace inst processor_0 -pg 1 -lvl 2 -x 420 -y 210 -defaultsOSRD
+preplace netloc CLK_100Mhz_1 1 0 1 NJ 190
+preplace netloc RESET_1 1 0 2 NJ 420 NJ
+preplace netloc blk_mem_gen_0_douta 1 1 2 230 100 610
+preplace netloc clk_wiz_0_clk_out1 1 1 2 210 90 630
+preplace netloc debouncer_0_out_pin 1 1 3 220 320 610 340 NJ
+preplace netloc equal_0_z 1 3 1 NJ 550
+preplace netloc equal_1_z 1 3 1 NJ 710
+preplace netloc processor_0_ap_return 1 2 1 620 260n
+preplace netloc processor_0_error 1 2 2 NJ 240 NJ
+preplace netloc processor_0_memory_address0 1 2 1 620 80n
+preplace netloc processor_0_memory_ce0 1 2 1 N 160
+preplace netloc processor_0_memory_d0 1 2 1 640 120n
+preplace netloc processor_0_memory_we0 1 2 1 N 180
+preplace netloc xlconstant_0_dout 1 2 1 NJ 520
+preplace netloc xlconstant_1_dout 1 2 1 NJ 700
+levelinfo -pg 1 -10 110 420 740 860
+pagesize -pg 1 -db -bbox -sgen -150 0 990 800
+"
+}
+{
+   "da_bram_cntlr_cnt":"1",
+   "da_clkrst_cnt":"1"
+}
