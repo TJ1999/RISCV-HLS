@@ -48,20 +48,26 @@ There was a warning when using these with variable-indexed ranges:
 
 Therefore, instructions like store and load have been implemented using if case instructions to use constant indexes
 
+Adding the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` has not made any advances
+
+### RISCV (RV32i) All-In-One Implementation using arbitrary integer functions and little optimize
+
+In this variation, the source registers are read in the first place. Also the result is stored in a variable and at the end stored in the register.
+
 ## Results
 
-| *Parameter*   | All-in-one | All-in-one aplib | PiocRV32I |
-| ------------- | ---------- | ---------------- | --------- |
-| LOC           | 384        | 371              | 3044      |
-| FFs           | 1108       | 846              |           |
-| LUTs          | 2261       | 2167             |           |
-| DSPs          | 0          |                  |           |
-| est. Power    | 0.248      | 0.268            |           |
-| II            | 6          | 5                |           |
-| Latency       | 7          | 6                |           |
-|               |            |                  |           |
-| dhrystone[^1] | 573        | 640              | 908[^2]   |
-| embench       |            |                  |           |
+| *Parameter*   | All-in-one | All-in-one aplib | All-in-one aplib opt | PiocRV32I |
+| ------------- | ---------- | ---------------- | -------------------- | --------- |
+| LOC           | 384        | 371              | 411                  | 3044      |
+| FFs           | 1108       | 846              | 537                  |           |
+| LUTs          | 2261       | 2167             | 2100                 |           |
+| DSPs          | 0          | 0                | 0                    |           |
+| est. Power    | 0.248      | 0.268            | 0.233                |           |
+| II            | 6          | 5                | 6                    |           |
+| Latency       | 7          | 6                | 7                    |           |
+|               |            |                  |                      |           |
+| dhrystone[^1] | 573        | 640              | 535                  | 908[^2]   |
+| embench       |            |                  |                      |           |
 
 [^1]: in Dhrystones/Second/Mhz
 
