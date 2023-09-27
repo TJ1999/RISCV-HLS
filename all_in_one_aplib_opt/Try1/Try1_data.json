@@ -95,7 +95,10 @@
       "config_export -vendor=TJ",
       "config_export -version=1.0.0"
     ],
-    "DirectiveTcl": ["set_directive_top processor -name processor"],
+    "DirectiveTcl": [
+      "set_directive_top processor -name processor",
+      "set_directive_top processor -name processor"
+    ],
     "ProfileOption": "0",
     "ProfileType": "none",
     "KernelName": "processor"
@@ -324,7 +327,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-25 14:09:51 +0200",
+    "Time": "2023-09-27 16:20:16 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

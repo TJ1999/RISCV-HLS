@@ -42,6 +42,11 @@
 			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try1/.tcls</location>
 		</link>
 		<link>
+			<name>Try2/constraints</name>
+			<type>2</type>
+			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try2/.tcls</location>
+		</link>
+		<link>
 			<name>source/rv32i.cpp</name>
 			<type>1</type>
 			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/src/rv32i.cpp</location>
@@ -70,6 +75,21 @@
 			<name>Try1/constraints/script.tcl</name>
 			<type>1</type>
 			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try1/script.tcl</location>
+		</link>
+		<link>
+			<name>Try2/constraints/.xml.directive</name>
+			<type>1</type>
+			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try2/Try2.directive</location>
+		</link>
+		<link>
+			<name>Try2/constraints/directives.tcl</name>
+			<type>1</type>
+			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try2/directives.tcl</location>
+		</link>
+		<link>
+			<name>Try2/constraints/script.tcl</name>
+			<type>1</type>
+			<location>C:/work/RISCV-HLS/all_in_one_aplib_opt/Try2/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

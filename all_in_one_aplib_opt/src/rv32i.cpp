@@ -2,17 +2,15 @@
 
 #include <iostream>
 
-u32 xreg[32] = { 0 };
+static u32 xreg[32] = { 0 };
 static u32 _pc = 0;
-static u1 _error = 0;
 
 void reset_processor() {
   for (int i = 0; i < 32; i++) {
     xreg[i] = 0;
   }
   _pc = 0;
-  _error = 0;
-}
+  }
 
 void Error(u1 *error) {
 #pragma HLS INLINE
@@ -28,6 +26,8 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
 #pragma HLS INTERFACE mode=ap_none port=pc
 #pragma HLS INTERFACE mode=ap_memory port=memory
 #pragma HLS RESET variable=_pc
+
+  static u1 _error = 0;
 
   // fetch 32-bit instruction
   i32 instr = static_cast<u32>(memory[_pc / 4]);

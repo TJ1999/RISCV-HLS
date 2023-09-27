@@ -10,7 +10,8 @@
         <file name="../src/processor_tb_big.cpp" sc="0" tb="1" cflags="-I../include -Wno-unknown-pragmas" csimflags="" blackbox="false"/>
     </files>
     <solutions xmlns="">
-        <solution name="Try1" status="active"/>
+        <solution name="Try1" status="inactive"/>
+        <solution name="Try2" status="active"/>
     </solutions>
 </project>
 

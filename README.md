@@ -28,10 +28,11 @@ hexdump -v -e '1/4 "%08x,\n"' <file>
 
 ## Settings
 
-| Setting | Value                               |
-| ------- | ----------------------------------- |
-| Part    | xc7a100tcpg236-1 lowest speed grade |
-| Period  | 10ns (100Mhz)                       |
+| Setting         | Value                               |
+| --------------- | ----------------------------------- |
+| Part            | xc7a100tcpg236-1 lowest speed grade |
+| Period for Try1 | 10ns (100Mhz)                       |
+| Period for Try2 | 20ns (50Mhz)                        |
 
 ## Variations
 
@@ -70,9 +71,11 @@ Moreover, the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` can now 
 
 ## Results
 
+**100 Mhz:**
+
 | *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | PiocRV32I |
 | ------------- | ----- | --------- | ------- | --------- | --------- |
-| LOC           | 384   | 371       | 411     | 425       | 3044      |
+| LOC           | 357   | 371       | 411     | 425       | 3044      |
 | FFs           | 1108  | 846       | 537     | 1635      |           |
 | LUTs          | 2261  | 2167      | 2100    | 2909      |           |
 | DSPs          | 0     | 0         | 0       | 0         |           |
@@ -81,6 +84,20 @@ Moreover, the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` can now 
 | Latency       | 7     | 6         | 7       | 5         |           |
 |               |       |           |         |           |           |
 | dhrystone[^1] | 573   | 640       | 535     | 694       | 908[^2]   |
+| embench       |       |           |         |           |           |
+
+**50 MHz:**
+| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | PiocRV32I |
+| ------------- | ----- | --------- | ------- | --------- | --------- |
+| LOC           | 357   | 371       | 411     | 425       | 3044      |
+| FFs           | 235   | 308       | 461     | 1456      |           |
+| LUTs          | 2040  | 2004      | 2073    | 2726      |           |
+| DSPs          | 0     | 0         | 0       | 0         |           |
+| est. Power    | 0.237 | 0.228     | 0.220   | 0.238     |           |
+| II            | 3     | 3         | 4       | 3         |           |
+| Latency       | 4     | 4         | 5       | 4         |           |
+|               |       |           |         |           |           |
+| dhrystone[^1] | 434   | 434       | 345     | 427       | 908[^2]   |
 | embench       |       |           |         |           |           |
 
 [^1]: in Dhrystones/Second/Mhz
