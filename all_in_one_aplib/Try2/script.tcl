@@ -12,7 +12,7 @@ add_files -tb all_in_one_aplib/src/processor_tb_big.cpp -cflags "-Iall_in_one_ap
 open_solution "Try2" -flow_target vivado
 set_part {xc7a100t-csg324-1}
 create_clock -period 20 -name default
-config_export -display_name RISCV_aio_aplib -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
+config_export -display_name RISCV_aio_aplib_2 -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
 source "./all_in_one_aplib/Try2/directives.tcl"
 csim_design
 csynth_design

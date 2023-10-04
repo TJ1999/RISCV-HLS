@@ -70,19 +70,6 @@
           "usage": "data",
           "direction": "out"
         }]
-    },
-    "pc": {
-      "index": "2",
-      "direction": "out",
-      "srcType": "ap_uint<32>*",
-      "srcSize": "32",
-      "hwRefs": [{
-          "type": "port",
-          "interface": "pc",
-          "name": "pc",
-          "usage": "data",
-          "direction": "out"
-        }]
     }
   },
   "HlsSolution": {
@@ -95,10 +82,7 @@
       "config_export -vendor=TJ",
       "config_export -version=1.0.0"
     ],
-    "DirectiveTcl": [
-      "set_directive_top processor -name processor",
-      "set_directive_top processor -name processor"
-    ],
+    "DirectiveTcl": ["set_directive_top processor -name processor"],
     "ProfileOption": "0",
     "ProfileType": "none",
     "KernelName": "processor"
@@ -224,21 +208,6 @@
           "register_option": "0",
           "argName": "error"
         }]
-    },
-    "pc": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_none",
-      "mode": "master",
-      "dataWidth": "32",
-      "portMap": {"pc": "DATA"},
-      "ports": ["pc"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_none",
-          "register_option": "0",
-          "argName": "pc"
-        }]
     }
   },
   "RtlPorts": {
@@ -274,10 +243,6 @@
       "dir": "out",
       "width": "1",
       "isVector": "true"
-    },
-    "pc": {
-      "dir": "out",
-      "width": "32"
     }
   },
   "ModuleInfo": {
@@ -292,7 +257,7 @@
     "Metrics": {"processor": {
         "Latency": {
           "LatencyBest": "4",
-          "LatencyAvg": "5",
+          "LatencyAvg": "4",
           "LatencyWorst": "6",
           "PipelineIIMin": "5",
           "PipelineIIMax": "7",
@@ -303,16 +268,16 @@
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "7.280"
+          "Estimate": "6.756"
         },
         "Area": {
-          "BRAM_18K": "1",
+          "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "652",
+          "FF": "518",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "2234",
+          "LUT": "2025",
           "AVAIL_LUT": "63400",
           "UTIL_LUT": "3",
           "URAM": "0",
@@ -327,7 +292,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-27 16:20:16 +0200",
+    "Time": "2023-10-04 12:52:33 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

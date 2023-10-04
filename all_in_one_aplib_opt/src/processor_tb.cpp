@@ -4,14 +4,10 @@
 #include <iostream>
 #include <vector>
 
-extern u32 pc;
-extern u32 xreg[32];
-
 void processor_tick_n(unsigned int times, std::vector<u32> &memory) {
   u1 error = static_cast<u1>(1);
-  u32 pc;
   for (int i = 0; i < times; i++) {
-    processor(memory.data(), &error, &pc);
+    processor(memory.data(), &error);
   }
   if (error == 1) {
     std::cout << "Error in processor!";

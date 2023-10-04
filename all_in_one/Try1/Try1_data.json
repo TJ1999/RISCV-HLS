@@ -70,19 +70,6 @@
           "usage": "data",
           "direction": "out"
         }]
-    },
-    "pc": {
-      "index": "2",
-      "direction": "out",
-      "srcType": "ap_uint<32>*",
-      "srcSize": "32",
-      "hwRefs": [{
-          "type": "port",
-          "interface": "pc",
-          "name": "pc",
-          "usage": "data",
-          "direction": "out"
-        }]
     }
   },
   "HlsSolution": {
@@ -91,7 +78,7 @@
       "config_cosim -tool=xsim",
       "config_export -display_name=RISCV_aio",
       "config_export -format=ip_catalog",
-      "config_export -output=C:\/work\/RISCV_HLS\/exported_rtls",
+      "config_export -output=C:\/work\/RISCV-HLS\/exported_rtls",
       "config_export -rtl=verilog",
       "config_export -vendor=TJ",
       "config_export -version=1.0.0"
@@ -225,21 +212,6 @@
           "register_option": "0",
           "argName": "error"
         }]
-    },
-    "pc": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_none",
-      "mode": "master",
-      "dataWidth": "32",
-      "portMap": {"pc": "DATA"},
-      "ports": ["pc"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_none",
-          "register_option": "0",
-          "argName": "pc"
-        }]
     }
   },
   "RtlPorts": {
@@ -275,10 +247,6 @@
       "dir": "out",
       "width": "1",
       "isVector": "true"
-    },
-    "pc": {
-      "dir": "out",
-      "width": "32"
     }
   },
   "ModuleInfo": {
@@ -310,10 +278,10 @@
           "BRAM_18K": "2",
           "AVAIL_BRAM": "100",
           "UTIL_BRAM": "2",
-          "FF": "1327",
+          "FF": "1295",
           "AVAIL_FF": "41600",
           "UTIL_FF": "3",
-          "LUT": "4059",
+          "LUT": "4033",
           "AVAIL_LUT": "20800",
           "UTIL_LUT": "19",
           "URAM": "0",
@@ -328,7 +296,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-19 18:24:58 +0200",
+    "Time": "2023-10-04 11:39:07 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

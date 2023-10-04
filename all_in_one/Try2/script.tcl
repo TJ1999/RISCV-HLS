@@ -10,7 +10,7 @@ add_files all_in_one/src/rv32i.cpp -cflags "-Iall_in_one/include"
 add_files -tb all_in_one/src/processor_tb.cpp -cflags "-Iall_in_one/include -Wno-unknown-pragmas"
 add_files -tb all_in_one/src/processor_tb_big.cpp -cflags "-Iall_in_one/include -Wno-unknown-pragmas"
 open_solution "Try2" -flow_target vivado
-set_part {xc7a100tcsg324-1}
+set_part {xc7a100t-csg324-1}
 create_clock -period 20 -name default
 config_cosim -tool xsim
 config_export -display_name RISCV_aio_2 -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0

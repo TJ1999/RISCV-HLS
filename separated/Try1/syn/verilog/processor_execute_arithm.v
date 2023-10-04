@@ -74,7 +74,6 @@ wire   [4:0] trunc_ln322_fu_368_p1;
 wire   [31:0] zext_ln322_fu_372_p1;
 wire   [0:0] icmp_ln303_fu_408_p2;
 wire   [0:0] icmp_ln292_fu_425_p2;
-wire  signed [11:0] trunc_ln285_fu_442_p0;
 wire   [4:0] trunc_ln285_fu_442_p1;
 wire   [31:0] zext_ln285_fu_446_p1;
 wire  signed [11:0] trunc_ln242_fu_496_p0;
@@ -211,7 +210,7 @@ assign trunc_ln250_fu_576_p1 = trunc_ln250_fu_576_p0[4:0];
 
 assign trunc_ln253_fu_561_p1 = trunc_ln253_fu_561_p0[4:0];
 
-assign trunc_ln285_fu_442_p1 = trunc_ln285_fu_442_p0[4:0];
+assign trunc_ln285_fu_442_p1 = source2_val[4:0];
 
 assign trunc_ln322_fu_368_p1 = source2_val[4:0];
 
@@ -262,7 +261,5 @@ assign trunc_ln242_fu_496_p0 = imm_I_val;
 assign trunc_ln250_fu_576_p0 = imm_I_val;
 
 assign trunc_ln253_fu_561_p0 = imm_I_val;
-
-assign trunc_ln285_fu_442_p0 = imm_I_val;
 
 endmodule //processor_execute_arithm

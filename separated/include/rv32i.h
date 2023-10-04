@@ -24,5 +24,5 @@ using i32 = ap_int<32>;
 static constexpr std::size_t MEMORY_DEPTH = 102'400;
 
 void reset_processor ();
-void processor (u32 memory[MEMORY_DEPTH], u1 &o_error, u32 &o_pc);
+void processor (u32 memory[MEMORY_DEPTH], u1 &o_error);
 void benchmark (bool &finished);

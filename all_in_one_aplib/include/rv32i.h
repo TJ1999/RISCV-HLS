@@ -22,5 +22,5 @@ using u32 = ap_uint<32>;
 using i32 = ap_int<32>;
 
 void reset_processor();
-void processor(u32* memory, u1* error, u32* _pc);
+void processor(u32* memory, u1* error);
 void benchmark(bool& finished);

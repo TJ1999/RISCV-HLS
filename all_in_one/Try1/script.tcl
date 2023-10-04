@@ -13,9 +13,9 @@ open_solution "Try1" -flow_target vivado
 set_part {xc7a35t-cpg236-1}
 create_clock -period 10 -name default
 config_cosim -tool xsim
-config_export -display_name RISCV_aio -format ip_catalog -output C:/work/RISCV_HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
+config_export -display_name RISCV_aio -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
 source "./all_in_one/Try1/directives.tcl"
 csim_design
 csynth_design
 cosim_design
-export_design -rtl verilog -format ip_catalog -output C:/work/RISCV_HLS/exported_rtls
+export_design -rtl verilog -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls

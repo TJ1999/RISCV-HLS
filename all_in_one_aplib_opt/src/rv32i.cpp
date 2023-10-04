@@ -3,14 +3,14 @@
 #include <iostream>
 
 static u32 xreg[32] = { 0 };
-static u32 _pc = 0;
+u32 _pc = 0;
 
 void reset_processor() {
   for (int i = 0; i < 32; i++) {
     xreg[i] = 0;
   }
   _pc = 0;
-  }
+}
 
 void Error(u1 *error) {
 #pragma HLS INLINE
@@ -20,10 +20,9 @@ void Error(u1 *error) {
   *error = static_cast<u1>(1);
 }
 
-void processor(u32 memory[102400], u1 *error, u32 *pc) {
+void processor(u32 memory[102400], u1 *error) {
 #pragma HLS INTERFACE mode=ap_ctrl_none port=return
 #pragma HLS INTERFACE mode=ap_none port=error
-#pragma HLS INTERFACE mode=ap_none port=pc
 #pragma HLS INTERFACE mode=ap_memory port=memory
 #pragma HLS RESET variable=_pc
 
@@ -51,6 +50,8 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
   u32 source1 = xreg[rs1];
   u32 source2 = xreg[rs2];
   u1 write_result = 0;
+  u1 write_memory = 0;
+  u32 mem_pos = 0;
   u32 result;
 
   bool branch = false;
@@ -122,52 +123,49 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
     }
     break;
   case 0b0000011: {  // Load
-    u32 pos = (source1 + imm_I) / 4;
+    mem_pos = (source1 + imm_I) / 4;
     u32 offset = ((source1 + imm_I) % 4) * 8;
+    u32 mem_val = memory[mem_pos];
+    write_result = 1;
     switch (funct3) {
     case 0b000:  // LB
       if (offset == 0) {
-        result = static_cast<i8>(memory[pos](7, 0));
+        result = static_cast<i8>(mem_val(7, 0));
       } else if (offset == 8) {
-        result = static_cast<i8>(memory[pos](15, 8));
+        result = static_cast<i8>(mem_val(15, 8));
       } else if (offset == 16) {
-        result = static_cast<i8>(memory[pos](23, 16));
+        result = static_cast<i8>(mem_val(23, 16));
       } else if (offset == 24) {
-        result = static_cast<i8>(memory[pos](31, 24));
+        result = static_cast<i8>(mem_val(31, 24));
       }
-      write_result = 1;
       break;
     case 0b001:  // LH
       if (offset == 0) {
-        result = static_cast<i16>(memory[pos](15, 0));
+        result = static_cast<i16>(mem_val(15, 0));
       } else if (offset == 16) {
-        result = static_cast<i16>(memory[pos](31, 16));
+        result = static_cast<i16>(mem_val(31, 16));
       }
-      write_result = 1;
       break;
     case 0b010: // LW
-      result = static_cast<u32>(memory[pos]);
-      write_result = 1;
+      result = static_cast<u32>(mem_val);
       break;
     case 0b100:  // LBU
       if (offset == 0) {
-        result = static_cast<u8>(memory[pos](7, 0));
+        result = static_cast<u8>(mem_val(7, 0));
       } else if (offset == 8) {
-        result = static_cast<u8>(memory[pos](15, 8));
+        result = static_cast<u8>(mem_val(15, 8));
       } else if (offset == 16) {
-        result = static_cast<u8>(memory[pos](23, 16));
+        result = static_cast<u8>(mem_val(23, 16));
       } else if (offset == 24) {
-        result = static_cast<u8>(memory[pos](31, 24));
+        result = static_cast<u8>(mem_val(31, 24));
       }
-      write_result = 1;
       break;
     case 0b101:  // LHU
       if (offset == 0) {
-        result = static_cast<u16>(memory[pos](15, 0));
+        result = static_cast<u16>(mem_val(15, 0));
       } else if (offset == 16) {
-        result = static_cast<u16>(memory[pos](31, 16));
+        result = static_cast<u16>(mem_val(31, 16));
       }
-      write_result = 1;
       break;
     default:
       // error
@@ -177,29 +175,33 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
     break;
   }
   case 0b0100011: {  // Store
-    u32 pos = (source1 + imm_S) / 4;
+    mem_pos = (source1 + imm_S) / 4;
     u32 offset = ((source1 + imm_S) % 4) * 8;
+    u32 mem_val = memory[mem_pos];
+    write_memory = 1;
     switch (funct3) {
     case 0b000:  // SB
       if (offset == 0) {
-        memory[pos](7, 0) = source2;
+        mem_val(7, 0) = source2;
       } else if (offset == 8) {
-        memory[pos](15, 8) = source2;
+        mem_val(15, 8) = source2;
       } else if (offset == 16) {
-        memory[pos](23, 16) = source2;
+        mem_val(23, 16) = source2;
       } else if (offset == 24) {
-        memory[pos](31, 24) = source2;
+        mem_val(31, 24) = source2;
       }
+      result = mem_val;
       break;
     case 0b001:  // SH
       if (offset == 0) {
-        memory[pos](15, 0) = source2;
+        mem_val(15, 0) = source2;
       } else if (offset == 16) {
-        memory[pos](31, 16) = source2;
+        mem_val(31, 16) = source2;
       }
+      result = mem_val;
       break;
     case 0b010:  // SW
-      memory[pos] = source2;
+      result = source2;
       break;
     default:
       // error
@@ -400,11 +402,14 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
   if (write_result) {
     xreg[rd] = result;
   }
+  // write memory
+  if (write_memory) {
+    memory[mem_pos] = result;
+  }
 
   // increment program counter
   if (!branch) {
     _pc += 4;
   }
-  *pc = _pc;
   *error = _error;
 }

@@ -5,10 +5,9 @@
 #include <vector>
 
 void processor_tick_n(unsigned int times, std::vector<u32> &memory) {
-  u1 error = static_cast<u1>(0);
-  u32 pc;
+  u1 error = static_cast<u1>(1);
   for (int i = 0; i < times; i++) {
-    processor(memory.data(), error, pc);
+    processor(memory.data(), error);
   }
   if (error == 1) {
     std::cout << "Error in processor!";

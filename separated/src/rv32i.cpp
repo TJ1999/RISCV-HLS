@@ -373,10 +373,9 @@ void do_write_back (u32 result, u5 rd, u32 xreg[32], u1 write_back) {
   }
 }
 
-void processor (u32 memory[MEMORY_DEPTH], u1 &o_error, u32 &o_pc) {
+void processor (u32 memory[MEMORY_DEPTH], u1 &o_error) {
 #pragma HLS INTERFACE mode=ap_ctrl_none port=return
 #pragma HLS INTERFACE mode=ap_none port=o_error
-#pragma HLS INTERFACE mode=ap_none port=o_pc
 #pragma HLS INTERFACE mode=ap_memory port=memory
 #pragma HLS RESET variable=g_pc
 
@@ -419,6 +418,5 @@ void processor (u32 memory[MEMORY_DEPTH], u1 &o_error, u32 &o_pc) {
       break;
   }
   do_write_back(result, rd, g_xreg, write_back);
-  o_pc = g_pc;
   o_error = g_error;
 }

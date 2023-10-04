@@ -70,31 +70,19 @@
           "usage": "data",
           "direction": "out"
         }]
-    },
-    "pc": {
-      "index": "2",
-      "direction": "out",
-      "srcType": "ap_uint<32>*",
-      "srcSize": "32",
-      "hwRefs": [{
-          "type": "port",
-          "interface": "pc",
-          "name": "pc",
-          "usage": "data",
-          "direction": "out"
-        }]
     }
   },
   "HlsSolution": {
     "FlowTarget": "vivado",
     "ConfigTcl": [
       "config_export -display_name=RISCV_aio_aplib",
-      "config_export -output=C:\/work\/RISCV-HLS\/exported_rtls",
-      "config_export -vendor=TJ",
-      "config_export -version=1.0.0",
       "config_export -format=ip_catalog",
-      "config_export -rtl=verilog"
+      "config_export -output=C:\/work\/RISCV-HLS\/exported_rtls",
+      "config_export -rtl=verilog",
+      "config_export -vendor=TJ",
+      "config_export -version=1.0.0"
     ],
+    "DirectiveTcl": ["set_directive_top processor -name processor"],
     "ProfileOption": "0",
     "ProfileType": "none",
     "KernelName": "processor"
@@ -220,21 +208,6 @@
           "register_option": "0",
           "argName": "error"
         }]
-    },
-    "pc": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_none",
-      "mode": "master",
-      "dataWidth": "32",
-      "portMap": {"pc": "DATA"},
-      "ports": ["pc"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_none",
-          "register_option": "0",
-          "argName": "pc"
-        }]
     }
   },
   "RtlPorts": {
@@ -270,10 +243,6 @@
       "dir": "out",
       "width": "1",
       "isVector": "true"
-    },
-    "pc": {
-      "dir": "out",
-      "width": "32"
     }
   },
   "ModuleInfo": {
@@ -305,10 +274,10 @@
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "992",
+          "FF": "960",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "2697",
+          "LUT": "2665",
           "AVAIL_LUT": "63400",
           "UTIL_LUT": "4",
           "URAM": "0",
@@ -323,7 +292,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-21 18:13:48 +0200",
+    "Time": "2023-10-04 12:00:04 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

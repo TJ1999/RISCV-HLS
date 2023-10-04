@@ -3,7 +3,7 @@
 #include <iostream>
 
 static u32 xreg[32] = { 0 };
-static u32 _pc = 0;
+u32 _pc = 0;
 
 void reset_processor() {
   for (int i = 0; i < 32; i++) {
@@ -20,10 +20,9 @@ void Error(u1 *error) {
   *error = static_cast<u1>(1);
 }
 
-void processor(u32 memory[102400], u1 *error, u32 *pc) {
+void processor(u32 memory[102400], u1 *error) {
 #pragma HLS INTERFACE mode=ap_ctrl_none port=return
 #pragma HLS INTERFACE mode=ap_none port=error
-#pragma HLS INTERFACE mode=ap_none port=pc
 #pragma HLS INTERFACE mode=ap_memory port=memory
 #pragma HLS RESET variable=_pc
 
@@ -365,6 +364,5 @@ void processor(u32 memory[102400], u1 *error, u32 *pc) {
   if (!branch) {
     _pc += 4;
   }
-  *pc = _pc;
   *error = _error;
 }

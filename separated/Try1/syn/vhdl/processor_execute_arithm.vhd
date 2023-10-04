@@ -86,7 +86,6 @@ attribute shreg_extract : string;
     signal zext_ln322_fu_372_p1 : STD_LOGIC_VECTOR (31 downto 0);
     signal icmp_ln303_fu_408_p2 : STD_LOGIC_VECTOR (0 downto 0);
     signal icmp_ln292_fu_425_p2 : STD_LOGIC_VECTOR (0 downto 0);
-    signal trunc_ln285_fu_442_p0 : STD_LOGIC_VECTOR (11 downto 0);
     signal trunc_ln285_fu_442_p1 : STD_LOGIC_VECTOR (4 downto 0);
     signal zext_ln285_fu_446_p1 : STD_LOGIC_VECTOR (31 downto 0);
     signal trunc_ln242_fu_496_p0 : STD_LOGIC_VECTOR (11 downto 0);
@@ -223,8 +222,7 @@ begin
     trunc_ln250_fu_576_p1 <= trunc_ln250_fu_576_p0(5 - 1 downto 0);
     trunc_ln253_fu_561_p0 <= imm_I_val;
     trunc_ln253_fu_561_p1 <= trunc_ln253_fu_561_p0(5 - 1 downto 0);
-    trunc_ln285_fu_442_p0 <= imm_I_val;
-    trunc_ln285_fu_442_p1 <= trunc_ln285_fu_442_p0(5 - 1 downto 0);
+    trunc_ln285_fu_442_p1 <= source2_val(5 - 1 downto 0);
     trunc_ln322_fu_368_p1 <= source2_val(5 - 1 downto 0);
     trunc_ln325_fu_353_p1 <= source2_val(5 - 1 downto 0);
     xor_ln232_fu_525_p2 <= (source1_val xor imm_I_val_cast_fu_312_p1);

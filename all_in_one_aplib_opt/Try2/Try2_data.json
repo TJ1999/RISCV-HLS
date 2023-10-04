@@ -70,19 +70,6 @@
           "usage": "data",
           "direction": "out"
         }]
-    },
-    "pc": {
-      "index": "2",
-      "direction": "out",
-      "srcType": "ap_uint<32>*",
-      "srcSize": "32",
-      "hwRefs": [{
-          "type": "port",
-          "interface": "pc",
-          "name": "pc",
-          "usage": "data",
-          "direction": "out"
-        }]
     }
   },
   "HlsSolution": {
@@ -105,7 +92,7 @@
     "ClockPeriod": "20",
     "Uncertainty": "5.4",
     "IsCombinational": "0",
-    "II": "4 ~ 5",
+    "II": "4",
     "Latency": "3"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 20.000 [get_ports ap_clk]"]},
@@ -221,21 +208,6 @@
           "register_option": "0",
           "argName": "error"
         }]
-    },
-    "pc": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_none",
-      "mode": "master",
-      "dataWidth": "32",
-      "portMap": {"pc": "DATA"},
-      "ports": ["pc"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_none",
-          "register_option": "0",
-          "argName": "pc"
-        }]
     }
   },
   "RtlPorts": {
@@ -271,10 +243,6 @@
       "dir": "out",
       "width": "1",
       "isVector": "true"
-    },
-    "pc": {
-      "dir": "out",
-      "width": "32"
     }
   },
   "ModuleInfo": {
@@ -289,11 +257,9 @@
     "Metrics": {"processor": {
         "Latency": {
           "LatencyBest": "3",
-          "LatencyAvg": "4",
-          "LatencyWorst": "4",
-          "PipelineIIMin": "4",
-          "PipelineIIMax": "5",
-          "PipelineII": "4 ~ 5",
+          "LatencyAvg": "3",
+          "LatencyWorst": "3",
+          "PipelineII": "4",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
@@ -306,10 +272,10 @@
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "571",
+          "FF": "309",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "2267",
+          "LUT": "1976",
           "AVAIL_LUT": "63400",
           "UTIL_LUT": "3",
           "URAM": "0",
@@ -324,7 +290,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-27 16:24:45 +0200",
+    "Time": "2023-10-04 12:54:23 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

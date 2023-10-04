@@ -70,19 +70,6 @@
           "usage": "data",
           "direction": "out"
         }]
-    },
-    "pc": {
-      "index": "2",
-      "direction": "out",
-      "srcType": "ap_uint<32>*",
-      "srcSize": "32",
-      "hwRefs": [{
-          "type": "port",
-          "interface": "pc",
-          "name": "pc",
-          "usage": "data",
-          "direction": "out"
-        }]
     }
   },
   "HlsSolution": {
@@ -222,21 +209,6 @@
           "register_option": "0",
           "argName": "error"
         }]
-    },
-    "pc": {
-      "type": "data",
-      "busTypeName": "data",
-      "protocol": "ap_none",
-      "mode": "master",
-      "dataWidth": "32",
-      "portMap": {"pc": "DATA"},
-      "ports": ["pc"],
-      "constraints": [{
-          "constraint_type": "pragma interface",
-          "mode": "ap_none",
-          "register_option": "0",
-          "argName": "pc"
-        }]
     }
   },
   "RtlPorts": {
@@ -272,10 +244,6 @@
       "dir": "out",
       "width": "1",
       "isVector": "true"
-    },
-    "pc": {
-      "dir": "out",
-      "width": "32"
     }
   },
   "ModuleInfo": {
@@ -307,12 +275,12 @@
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "333",
+          "FF": "301",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "3810",
+          "LUT": "3778",
           "AVAIL_LUT": "63400",
-          "UTIL_LUT": "6",
+          "UTIL_LUT": "5",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0",
@@ -325,7 +293,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-09-27 15:42:58 +0200",
+    "Time": "2023-10-04 11:42:38 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }
