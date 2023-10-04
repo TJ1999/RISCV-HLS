@@ -69,37 +69,49 @@ The all in one function has been splitted in the following functions:
 
 Moreover, the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` can now be defined to further improve performance.
 
+### Separated optimized
+
+TODO
+
 ## Results
+Notes:
+- Rocket Chips are too big and complex to compare them here
+- OoO Chip by Andrew Hanselman offeres no sources
+- PicoRV32I does not execute benchmark due to an memory misalignment trap
+
+> ***WARNING: Benchmarks need to be redone due to new linkerscript file!!!***
 
 **100 Mhz:**
 
-| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | PiocRV32I |
-| ------------- | ----- | --------- | ------- | --------- | --------- |
-| LOC           | 357   | 371       | 411     | 425       | 3044      |
-| FFs           | 1108  | 846       | 537     | 1635      |           |
-| LUTs          | 2261  | 2167      | 2100    | 2909      |           |
-| DSPs          | 0     | 0         | 0       | 0         |           |
-| est. Power    | 0.248 | 0.268     | 0.233   | 0.260     |           |
-| II            | 6     | 5         | 6       | 4         |           |
-| Latency       | 7     | 6         | 7       | 5         |           |
-|               |       |           |         |           |           |
-| dhrystone[^1] | 573   | 640       | 535     | 694       | 908[^2]   |
-| embench       |       |           |         |           |           |
+| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | COMET     | PiocRV32I |
+| ------------- | ----- | --------- | ------- | --------- | --------- | --------- |
+| LOC           | 357   | 371       | 411     | 425       |           | 3044      |
+| FFs           | 1108  | 846       | 537     | 1635      |           | 464       |
+| LUTs          | 2261  | 2167      | 2100    | 2909      |           | 1097      |
+| DSPs          | 0     | 0         | 0       | 0         |           | 0         |
+| est. Power    | 0.248 | 0.268     | 0.233   | 0.260     | Timing    | 0.213     |
+| II            | 6     | 5         | 6       | 4         | Violation | -         |
+| Latency       | 7     | 6         | 7       | 5         |           | -         |
+|               |       |           |         |           |           |           |
+| dhrystone[^1] | 573   | 640       | 535     | 694       |           | 908[^2]   |
+| embench       |       |           |         |           |           |           |
 
 **50 MHz:**
-| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | PiocRV32I |
-| ------------- | ----- | --------- | ------- | --------- | --------- |
-| LOC           | 357   | 371       | 411     | 425       | 3044      |
-| FFs           | 235   | 308       | 461     | 1456      |           |
-| LUTs          | 2040  | 2004      | 2073    | 2726      |           |
-| DSPs          | 0     | 0         | 0       | 0         |           |
-| est. Power    | 0.237 | 0.228     | 0.220   | 0.238     |           |
-| II            | 3     | 3         | 4       | 3         |           |
-| Latency       | 4     | 4         | 5       | 4         |           |
-|               |       |           |         |           |           |
-| dhrystone[^1] | 434   | 434       | 345     | 427       | 908[^2]   |
-| embench       |       |           |         |           |           |
+| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | COMET | PiocRV32I |
+| ------------- | ----- | --------- | ------- | --------- | ----- | --------- |
+| LOC           | 357   | 371       | 411     | 425       | ~700  | 3044      |
+| FFs           | 235   | 308       | 461     | 1456      | 811   | 464       |
+| LUTs          | 2040  | 2004      | 2073    | 2726      | 1818  | 1097      |
+| DSPs          | 0     | 0         | 0       | 0         | 4     | 0         |
+| est. Power    | 0.237 | 0.228     | 0.220   | 0.238     | 0.228 | 0.204     |
+| II            | 3     | 3         | 4       | 3         | -     | -         |
+| Latency       | 4     | 4         | 5       | 4         | -     | -         |
+|               |       |           |         |           |       |           |
+| dhrystone[^1] | 434   | 434       | 345     | 427       | [^3]  | 908[^2]   |
+| embench       |       |           |         |           |       |           |
 
 [^1]: in Dhrystones/Second/Mhz
 
-[^2]: with enabled `ENABLE_FAST_MUL`, `ENABLE_DIV`, and `BARREL_SHIFTER` options with CPI ~4.1 or CPI ~5.232 without look-ahead memory and only 0.305 DMIPS/MHz or 536 Drystones/s
+[^2]: according to GitHub: with enabled `ENABLE_FAST_MUL`, `ENABLE_DIV`, and `BARREL_SHIFTER` options with CPI ~4.1 or CPI ~5.232 without look-ahead memory and only 0.305 DMIPS/MHz or 536 Drystones/s. Pico Processor synthesises but behaves not as expected. Jumping to a function results in too far jumps. Therefore, the benchmark could not be executed
+
+[^3]: only provides 8192 byte data mem hard coded
