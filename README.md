@@ -38,7 +38,8 @@ hexdump -v -e '1/4 "%08x,\n"' <file>
 
 ### All-In-One Implementation
 
-This is the first implementation trying to put the whole logic in one single cpp file and function
+This is the first implementation trying to put the whole logic in one single cpp file and function.
+By trying to change the architecture from von Neumann to Harvard, Latency stays the same.
 
 ### All-In-One Implementation using arbitrary integer functions
 
@@ -50,6 +51,8 @@ There was a warning when using these with variable-indexed ranges:
 Therefore, instructions like store and load have been implemented using if case instructions to use constant indexes
 
 Adding the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` has not made any advances
+
+By trying to change the architecture from von Neumann to Harvard, Latency stays the same.
 
 ### All-In-One Implementation using arbitrary integer functions and little optimize
 
@@ -68,6 +71,8 @@ The all in one function has been splitted in the following functions:
 - `write_back`
 
 Moreover, the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` can now be defined to further improve performance.
+
+By trying to change the architecture from von Neumann to Harvard, Latency stays the same.
 
 ### Separated optimized
 
