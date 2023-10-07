@@ -52,20 +52,20 @@ void decode_fetch_operands (i32 instr, u7 &op_code, u3 &funct3, u7 &funct7, u12 
 }
 
 void execute_branch (u7 op_code, u3 funct3, u32 &result, u32 &pc, u32 old_pc, u1 &error, i32 imm_B, i32 imm_I,
-                     i32 imm_J, u32 source1, u32 source2, u1& write_back) {
+                     i32 imm_J, u32 source1, u32 source2, u1 &write_reg) {
   switch (op_code) {
     case 0b110'1111:  // JAL
       result = old_pc + 4;
       pc = old_pc + imm_J;
-      write_back = 1;
+      write_reg = 1;
       break;
     case 0b110'0111:  // JALR
       result = old_pc + 4;
       pc = source1 + imm_I;
-      write_back = 1;
+      write_reg = 1;
       break;
     case 0b1100011:  // Branch
-      write_back = 0;
+      write_reg = 0;
       switch (funct3) {
         case 0b000:  // BEQ
           if (source1 == source2) {
@@ -108,7 +108,8 @@ void execute_branch (u7 op_code, u3 funct3, u32 &result, u32 &pc, u32 old_pc, u1
   }
 }
 
-void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_DEPTH], u1 &error, u32 source1, u1& write_back) {
+void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_DEPTH], u1 &error, u32 source1,
+                   u1 &write_reg) {
   u32 pos = (source1 + imm_I) / 4;
   u32 offset = ((source1 + imm_I) % 4) * 8;
   if (pos >= MEMORY_DEPTH) {
@@ -158,10 +159,11 @@ void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_DE
       Error(&error);
       break;
   }
-  write_back = 1;
+  write_reg = 1;
 }
 
-void execute_store (u32 memory[MEMORY_DEPTH], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2, u1& write_back) {
+void execute_store (u32 memory[MEMORY_DEPTH], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2,
+                    u1 &write_reg) {
   u32 pos = (source1 + imm_S) / 4;
   u32 offset = ((source1 + imm_S) % 4) * 8;
   if (pos >= MEMORY_DEPTH) {
@@ -194,22 +196,22 @@ void execute_store (u32 memory[MEMORY_DEPTH], u3 funct3, i32 imm_S, u1 &error, u
       Error(&error);
       break;
   }
-  write_back = 0;
+  write_reg = 0;
 }
 
 void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2, i32 imm_I, i32 imm_U, u32 &result,
-                     u1 &error, u32 old_pc, u1& write_back) {
+                     u1 &error, u32 old_pc, u1 &write_reg) {
   switch (op_code) {
     case 0b001'0111:  // AUI_pc
       result = imm_U + old_pc;
-      write_back = 1;
+      write_reg = 1;
       break;
     case 0b011'0111:  // LUI
       result = imm_U;
-      write_back = 1;
+      write_reg = 1;
       break;
     case 0b0010011:  // Arithmetic Intermediate
-      write_back = 1;
+      write_reg = 1;
       switch (funct3) {
         case 0b000:  // ADDI
           result = source1 + imm_I;
@@ -263,7 +265,7 @@ void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2,
       }
       break;
     case 0b0110011:  // Arithmetic Register
-      write_back = 1;
+      write_reg = 1;
       switch (funct3) {
         case 0b000:  // Addition
           switch (funct7) {
@@ -350,11 +352,11 @@ void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2,
       }
       break;
     case 0b0001111:  // FENCE
-      write_back = 0;
+      write_reg = 0;
       Error(&error);
       break;
     case 0b1110011:  // ECALL / EBRAK
-      write_back = 0;
+      write_reg = 0;
       if (imm_I == 0) {  // ECALL
         // nop
       } else {  // EBREAK
@@ -367,9 +369,13 @@ void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2,
   }
 }
 
-void do_write_back (u32 result, u5 rd, u32 xreg[32], u1 write_back) {
-  if (write_back) {
+void write_back (u32 result, u5 rd, u32 xreg[32], u32 memory[MEMORY_DEPTH / 2], u1 write_reg, u1 write_mem,
+                 u32 write_addr) {
+  if (write_reg) {
     xreg[rd] = result;
+  }
+  if (write_mem) {
+    memory[write_addr] = result;
   }
 }
 
@@ -396,7 +402,9 @@ void processor (u32 memory[MEMORY_DEPTH], u1 &o_error) {
   i32 imm_U;
   u32 result;
   u32 old_pc;
-  u1 write_back;
+  u1 write_reg = 0;
+  u1 write_mem = 0;
+  u32 write_addr;
 
   fetch_instruction(memory, g_pc, instr, g_error, old_pc);
   decode_fetch_operands(instr, op_code, funct3, funct7, funct12, source1, source2, rd, imm_B, imm_I, imm_J, imm_S,
@@ -405,18 +413,18 @@ void processor (u32 memory[MEMORY_DEPTH], u1 &o_error) {
     case 0b1101111:  // JAL
     case 0b1100111:  // JALR
     case 0b1100011:  // Bxxx
-      execute_branch(op_code, funct3, result, g_pc, old_pc, g_error, imm_B, imm_I, imm_J, source1, source2, write_back);
+      execute_branch(op_code, funct3, result, g_pc, old_pc, g_error, imm_B, imm_I, imm_J, source1, source2, write_reg);
       break;
     case 0b0000011:
-      execute_load(funct3, imm_I, result, memory, g_error, source1, write_back);
+      execute_load(funct3, imm_I, result, memory, g_error, source1, write_reg);
       break;
     case 0b0100011:
-      execute_store(memory, funct3, imm_S, g_error, source1, source2, write_back);
+      execute_store(memory, funct3, imm_S, g_error, source1, source2, write_reg);
       break;
     default:
-      execute_arithm(op_code, funct3, funct7, source1, source2, imm_I, imm_U, result, g_error, old_pc, write_back);
+      execute_arithm(op_code, funct3, funct7, source1, source2, imm_I, imm_U, result, g_error, old_pc, write_reg);
       break;
   }
-  do_write_back(result, rd, g_xreg, write_back);
+  write_back(result, rd, g_xreg, memory, write_reg, write_mem, write_addr);
   o_error = g_error;
 }

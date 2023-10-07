@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-static u32 xreg[32] = { 0 };
+u32 xreg[32] = { 0 };
 u32 _pc = 0;
 
 void reset_processor() {
