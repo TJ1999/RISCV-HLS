@@ -12,7 +12,7 @@ add_files -tb separated/src/processor_tb_big.cpp -cflags "-Iseparated/include -W
 open_solution "Try2" -flow_target vivado
 set_part {xc7a100t-csg324-1}
 create_clock -period 20 -name default
-config_export -display_name RISCV_sep_2 -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
+config_export -display_name RISCV_sep_2 -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.1
 source "./separated/Try2/directives.tcl"
 csim_design
 csynth_design

@@ -1,4 +1,4 @@
-#if 1
+#if 0
 #include "rv32i.h"
 #include "assert.h"
 #include <iostream>

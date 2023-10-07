@@ -117,7 +117,7 @@ void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_SI
     pos &= 0x0FFF'FFFF;
   }
   pos /= 4;
-  u32 offset = ((pos) % 4) * 8;
+  u32 offset = ((source1 + imm_I) % 4) * 8;
   if (pos >= MEMORY_SIZE / 2) {
     Error(&error);
   }
@@ -168,7 +168,7 @@ void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_SI
   write_reg = 1;
 }
 
-void execute_store (u32 memory[MEMORY_SIZE / 2], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2,
+void execute_store (const u32 memory[MEMORY_SIZE / 2], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2,
                     u1 &write_mem, u32 &result, u32 &write_addr) {
   u32 pos = (source1 + imm_S);
   if (!(pos & 0x1000'0000)) {
@@ -177,11 +177,11 @@ void execute_store (u32 memory[MEMORY_SIZE / 2], u3 funct3, i32 imm_S, u1 &error
     pos &= 0x0FFF'FFFF;
   }
   write_addr = pos / 4;
-  result = memory[write_addr];
-  u32 offset = (pos % 4) * 8;
+  u32 offset = ((source1 + imm_S) % 4) * 8;
   if (write_addr >= MEMORY_SIZE / 2) {
     Error(&error);
   }
+  result = memory[write_addr];
   switch (funct3) {
     case 0b000:  // SB
       if (offset == 0) {
@@ -382,13 +382,13 @@ void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2,
   }
 }
 
-void write_back (u32 result, u5 rd, u32 xreg[32], u32 data_memory[MEMORY_SIZE / 2], u1 write_reg, u1 write_mem,
+void write_back (u32 result, u5 rd, u32 xreg[32], u32 memory[MEMORY_SIZE / 2], u1 write_reg, u1 write_mem,
                  u32 write_addr) {
   if (write_reg) {
     xreg[rd] = result;
   }
   if (write_mem) {
-    data_memory[write_addr] = result;
+    memory[write_addr] = result;
   }
 }
 
@@ -400,6 +400,8 @@ void processor (const u32 instr_memory[MEMORY_SIZE / 2], u32 data_memory[MEMORY_
 #pragma HLS RESET variable=g_pc
 
 #pragma HLS ARRAY_PARTITION variable=g_xreg type=complete
+
+  while(1) {
 
   i32 instr;
   u7 op_code;
@@ -440,5 +442,5 @@ void processor (const u32 instr_memory[MEMORY_SIZE / 2], u32 data_memory[MEMORY_
       break;
   }
   write_back(result, rd, g_xreg, data_memory, write_reg, write_mem, write_addr);
-  *error = g_error;
+  *error = g_error;}
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 
 static u32 g_xreg[32] = { 0 };
-static u32 g_pc = 0;
+u32 g_pc = 0;
 static u1 g_error = 0;
 
 void reset_processor () {
@@ -162,41 +162,42 @@ void execute_load (u3 funct3, i32 imm_I, u32 &result, const u32 memory[MEMORY_DE
   write_reg = 1;
 }
 
-void execute_store (u32 memory[MEMORY_DEPTH], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2,
-                    u1 &write_reg) {
-  u32 pos = (source1 + imm_S) / 4;
+void execute_store (const u32 memory[MEMORY_DEPTH], u3 funct3, i32 imm_S, u1 &error, u32 source1, u32 source2,
+                    u1 &write_mem, u32 &result, u32 &write_addr) {
+  write_addr = (source1 + imm_S) / 4;
   u32 offset = ((source1 + imm_S) % 4) * 8;
-  if (pos >= MEMORY_DEPTH) {
+  if (write_addr >= MEMORY_DEPTH) {
     Error(&error);
   }
+  result = memory[write_addr];
   switch (funct3) {
     case 0b000:  // SB
       if (offset == 0) {
-        memory[pos](7, 0) = source2;
+        result(7, 0) = source2;
       } else if (offset == 8) {
-        memory[pos](15, 8) = source2;
+        result(15, 8) = source2;
       } else if (offset == 16) {
-        memory[pos](23, 16) = source2;
+        result(23, 16) = source2;
       } else if (offset == 24) {
-        memory[pos](31, 24) = source2;
+        result(31, 24) = source2;
       }
       break;
     case 0b001:  // SH
       if (offset == 0) {
-        memory[pos](15, 0) = source2;
+        result(15, 0) = source2;
       } else if (offset == 16) {
-        memory[pos](31, 16) = source2;
+        result(31, 16) = source2;
       }
       break;
     case 0b010:  // SW
-      memory[pos] = source2;
+      result = source2;
       break;
     default:
       // error
       Error(&error);
       break;
   }
-  write_reg = 0;
+  write_mem = 1;
 }
 
 void execute_arithm (u7 op_code, u3 funct3, u7 funct7, u32 source1, u32 source2, i32 imm_I, i32 imm_U, u32 &result,
@@ -419,7 +420,7 @@ void processor (u32 memory[MEMORY_DEPTH], u1 &o_error) {
       execute_load(funct3, imm_I, result, memory, g_error, source1, write_reg);
       break;
     case 0b0100011:
-      execute_store(memory, funct3, imm_S, g_error, source1, source2, write_reg);
+      execute_store(memory, funct3, imm_S, g_error, source1, source2, write_mem, result, write_addr);
       break;
     default:
       execute_arithm(op_code, funct3, funct7, source1, source2, imm_I, imm_U, result, g_error, old_pc, write_reg);

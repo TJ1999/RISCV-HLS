@@ -7,7 +7,7 @@
     </downStreamTool>
     <synthesis askAgain="true"/>
     <config>
-        <config_export display_name="RISCV_sep_hvd" format="ip_catalog" output="C:/work/RISCV-HLS/exported_rtls" rtl="verilog" vendor="TJ" version="1.0.0"/>
+        <config_export display_name="RISCV_sep_hvd" format="ip_catalog" output="C:/work/RISCV-HLS/exported_rtls" rtl="verilog" vendor="TJ" version="1.0.1"/>
     </config>
     <UIConfigurations>
         <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">
@@ -69,7 +69,7 @@
         <library value="xilinx/artix7/artix7" name="DefaultPlatform"/>
     </libraryList>
     <clockList>
-        <clock name="default" default="false" period="10"/>
+        <clock default="false" name="default" period="10"/>
     </clockList>
 </solution>
 

@@ -12,7 +12,7 @@ add_files -tb separated_harvard/src/processor_tb_big.cpp -cflags "-Iseparated_ha
 open_solution "Try1" -flow_target vivado
 set_part {xc7a100t-csg324-1}
 create_clock -period 10 -name default
-config_export -display_name RISCV_sep_hvd -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.0
+config_export -display_name RISCV_sep_hvd -format ip_catalog -output C:/work/RISCV-HLS/exported_rtls -rtl verilog -vendor TJ -version 1.0.1
 source "./separated_harvard/Try1/directives.tcl"
 csim_design
 csynth_design

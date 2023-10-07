@@ -2,7 +2,7 @@
     <includePaths/>
     <libraryPaths/>
     <Simulation>
-        <SimFlow name="csim" csimMode="0" lastCsimMode="0"/>
+        <SimFlow name="csim" csimMode="0" lastCsimMode="2"/>
     </Simulation>
     <files xmlns="">
         <file name="separated_harvard/src/rv32i.cpp" sc="0" tb="false" cflags="-Iseparated_harvard/include" csimflags="" blackbox="false"/>

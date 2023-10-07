@@ -54,6 +54,8 @@ Adding the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` has not mad
 
 By trying to change the architecture from von Neumann to Harvard, Latency stays the same.
 
+By trying to pipeline the function using a while loop, latency remains unchanged
+
 ### All-In-One Implementation using arbitrary integer functions and little optimize
 
 In this variation, the source registers are read in the first place. Also the result is stored in a variable and at the end stored in the register.
@@ -90,25 +92,25 @@ Notes:
 
 | *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | COMET     | PiocRV32I |
 | ------------- | ----- | --------- | ------- | --------- | --------- | --------- |
-| LOC           | 355   | 369       | 416     | 423       |           | 3044      |
-| FFs           | 1057  | 795       | 352     | 1617      |           | 464       |
-| LUTs          | 2253  | 2104      | 1807    | 2926      |           | 1097      |
+| LOC           | 355   | 369       | 416     | 432       |           | 3044      |
+| FFs           | 1057  | 795       | 352     | 1567      |           | 464       |
+| LUTs          | 2253  | 2104      | 1807    | 2609      |           | 1097      |
 | DSPs          | 0     | 0         | 0       | 0         |           | 0         |
-| est. Power    | 0.246 | 0.244     | 0.227   | 0.279     | Timing    | 0.213     |
-| II            | 6     | 5         | 6       | 4         | Violation | -         |
-| Latency       | 7     | 6         | 7       | 5         |           | -         |
+| est. Power    | 0.246 | 0.244     | 0.227   | 0.233     | Timing    | 0.213     |
+| II            | 6     | 5         | 6       | 5         | Violation | -         |
+| Latency       | 7     | 6         | 7       | 6         |           | -         |
 |               |       |           |         |           |           |           |
-| dhrystone[^1] | 573   | 640       | 552     | 696       |           | 908[^2]   |
+| dhrystone[^1] | 573   | 640       | 552     | 587       |           | 908[^2]   |
 | embench       |       |           |         |           |           |           |
 
 **50 MHz:**
 | *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | COMET | PiocRV32I |
 | ------------- | ----- | --------- | ------- | --------- | ----- | --------- |
-| LOC           | 355   | 369       | 416     | 423       | ~700  | 3044      |
-| FFs           | 187   | 258       | 239     | 1438      | 811   | 464       |
-| LUTs          | 1918  | 1914      | 1845    | 2700      | 1818  | 1097      |
+| LOC           | 355   | 369       | 416     | 432       | ~700  | 3044      |
+| FFs           | 187   | 258       | 239     | 1353      | 811   | 464       |
+| LUTs          | 1918  | 1914      | 1845    | 2732      | 1818  | 1097      |
 | DSPs          | 0     | 0         | 0       | 0         | 4     | 0         |
-| est. Power    | 0.231 | 0.222     | 0.238   | 0.241     | 0.228 | 0.204     |
+| est. Power    | 0.231 | 0.222     | 0.238   | 0.221     | 0.228 | 0.204     |
 | II            | 3     | 3         | 3       | 3         | -     | -         |
 | Latency       | 4     | 4         | 4       | 4         | -     | -         |
 |               |       |           |         |           |       |           |
