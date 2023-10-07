@@ -1,12 +1,12 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x256EB79351BBCB73",
+      "boundary_crc": "0x6B4BA0C0B19A6F7A",
       "device": "xc7a100tcsg324-1",
       "gen_directory": "../../../../fpga_riscv_impl.gen/sources_1/bd/top",
       "name": "top",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
-      "synth_flow_mode": "Hierarchical",
+      "synth_flow_mode": "None",
       "tool_version": "2023.1.1",
       "validated": "true"
     },
@@ -14,10 +14,11 @@
       "clk_wiz_0": "",
       "Prog_stop_addr": "",
       "Prog_start_addr": "",
-      "blk_mem_gen_0": "",
       "equal_0": "",
       "equal_1": "",
       "debouncer_0": "",
+      "data_mem": "",
+      "instr_mem": "",
       "processor_0": ""
     },
     "ports": {
@@ -50,6 +51,15 @@
       },
       "LED0": {
         "direction": "O"
+      },
+      "IO40": {
+        "direction": "O"
+      },
+      "IO41": {
+        "direction": "O"
+      },
+      "IO39": {
+        "direction": "O"
       }
     },
     "components": {
@@ -61,6 +71,12 @@
         "parameters": {
           "CLKFB_IN_SIGNALING": {
             "value": "SINGLE"
+          },
+          "CLKOUT1_JITTER": {
+            "value": "151.636"
+          },
+          "CLKOUT1_REQUESTED_OUT_FREQ": {
+            "value": "50"
           },
           "CLKOUT2_JITTER": {
             "value": "151.636"
@@ -76,6 +92,9 @@
           },
           "FEEDBACK_SOURCE": {
             "value": "FDBK_AUTO"
+          },
+          "MMCM_CLKOUT0_DIVIDE_F": {
+            "value": "20.000"
           },
           "MMCM_CLKOUT1_DIVIDE": {
             "value": "1"
@@ -104,7 +123,7 @@
         "inst_hier_path": "Prog_stop_addr",
         "parameters": {
           "CONST_VAL": {
-            "value": "0x200"
+            "value": "0x80"
           },
           "CONST_WIDTH": {
             "value": "32"
@@ -118,39 +137,10 @@
         "inst_hier_path": "Prog_start_addr",
         "parameters": {
           "CONST_VAL": {
-            "value": "0x100"
+            "value": "0x40"
           },
           "CONST_WIDTH": {
             "value": "32"
-          }
-        }
-      },
-      "blk_mem_gen_0": {
-        "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
-        "xci_name": "top_blk_mem_gen_0_0",
-        "xci_path": "ip\\top_blk_mem_gen_0_0\\top_blk_mem_gen_0_0.xci",
-        "inst_hier_path": "blk_mem_gen_0",
-        "parameters": {
-          "Coe_File": {
-            "value": "../../../../../../../benchmark_coe/dry2.coe"
-          },
-          "Collision_Warnings": {
-            "value": "ALL"
-          },
-          "Fill_Remaining_Memory_Locations": {
-            "value": "true"
-          },
-          "Load_Init_File": {
-            "value": "true"
-          },
-          "Register_PortA_Output_of_Memory_Primitives": {
-            "value": "false"
-          },
-          "Write_Depth_A": {
-            "value": "102400"
-          },
-          "use_bram_block": {
-            "value": "Stand_Alone"
           }
         }
       },
@@ -190,7 +180,7 @@
                 "value_src": "constant"
               },
               "FREQ_HZ": {
-                "value": "100000000",
+                "value": "50000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -248,7 +238,7 @@
                 "value_src": "constant"
               },
               "FREQ_HZ": {
-                "value": "100000000",
+                "value": "50000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -277,7 +267,7 @@
         "inst_hier_path": "debouncer_0",
         "parameters": {
           "MAX_COUNT": {
-            "value": "1000000"
+            "value": "50000"
           }
         },
         "reference_info": {
@@ -291,7 +281,7 @@
             "direction": "I",
             "parameters": {
               "FREQ_HZ": {
-                "value": "100000000",
+                "value": "50000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -312,10 +302,68 @@
           }
         }
       },
+      "data_mem": {
+        "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
+        "xci_name": "top_instr_mem_0",
+        "xci_path": "ip\\top_instr_mem_0\\top_instr_mem_0.xci",
+        "inst_hier_path": "data_mem",
+        "parameters": {
+          "Coe_File": {
+            "value": "../../../../../../../benchmark_coe/dry2.data.coe"
+          },
+          "Collision_Warnings": {
+            "value": "ALL"
+          },
+          "Fill_Remaining_Memory_Locations": {
+            "value": "true"
+          },
+          "Load_Init_File": {
+            "value": "true"
+          },
+          "Register_PortA_Output_of_Memory_Primitives": {
+            "value": "false"
+          },
+          "Write_Depth_A": {
+            "value": "51200"
+          },
+          "use_bram_block": {
+            "value": "Stand_Alone"
+          }
+        }
+      },
+      "instr_mem": {
+        "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
+        "xci_name": "top_data_mem_0",
+        "xci_path": "ip\\top_data_mem_0\\top_data_mem_0.xci",
+        "inst_hier_path": "instr_mem",
+        "parameters": {
+          "Coe_File": {
+            "value": "../../../../../../../benchmark_coe/dry2_instr.coe"
+          },
+          "Fill_Remaining_Memory_Locations": {
+            "value": "true"
+          },
+          "Load_Init_File": {
+            "value": "true"
+          },
+          "Memory_Type": {
+            "value": "Single_Port_ROM"
+          },
+          "Register_PortA_Output_of_Memory_Primitives": {
+            "value": "false"
+          },
+          "Write_Depth_A": {
+            "value": "51200"
+          },
+          "use_bram_block": {
+            "value": "Stand_Alone"
+          }
+        }
+      },
       "processor_0": {
         "vlnv": "TJ:hls:processor:1.0",
-        "xci_name": "top_processor_0_0",
-        "xci_path": "ip\\top_processor_0_0\\top_processor_0_0.xci",
+        "xci_name": "top_processor_0_2",
+        "xci_path": "ip\\top_processor_0_2\\top_processor_0_2.xci",
         "inst_hier_path": "processor_0"
       }
     },
@@ -332,20 +380,27 @@
           "debouncer_0/in_pin"
         ]
       },
-      "blk_mem_gen_0_douta": {
-        "ports": [
-          "blk_mem_gen_0/douta",
-          "processor_0/memory_q0"
-        ]
-      },
       "clk_wiz_0_clk_out1": {
         "ports": [
           "clk_wiz_0/clk_out1",
-          "blk_mem_gen_0/clka",
           "equal_1/clk",
           "equal_0/clk",
           "debouncer_0/clk",
+          "data_mem/clka",
+          "instr_mem/clka",
           "processor_0/ap_clk"
+        ]
+      },
+      "data_mem1_douta": {
+        "ports": [
+          "instr_mem/douta",
+          "processor_0/instr_memory_q0"
+        ]
+      },
+      "data_mem_douta": {
+        "ports": [
+          "data_mem/douta",
+          "processor_0/data_memory_q0"
         ]
       },
       "debouncer_0_out_pin": {
@@ -354,26 +409,46 @@
           "equal_1/rst",
           "equal_0/rst",
           "LED0",
+          "IO39",
           "processor_0/ap_rst"
         ]
       },
       "equal_0_z": {
         "ports": [
           "equal_0/z",
-          "DONE"
+          "DONE",
+          "IO41"
         ]
       },
       "equal_1_z": {
         "ports": [
           "equal_1/z",
-          "START"
+          "START",
+          "IO40"
         ]
       },
-      "processor_0_ap_return": {
+      "processor_0_data_memory_address0": {
         "ports": [
-          "processor_0/pc",
-          "equal_0/b",
-          "equal_1/a"
+          "processor_0/data_memory_address0",
+          "data_mem/addra"
+        ]
+      },
+      "processor_0_data_memory_ce0": {
+        "ports": [
+          "processor_0/data_memory_ce0",
+          "data_mem/ena"
+        ]
+      },
+      "processor_0_data_memory_d0": {
+        "ports": [
+          "processor_0/data_memory_d0",
+          "data_mem/dina"
+        ]
+      },
+      "processor_0_data_memory_we0": {
+        "ports": [
+          "processor_0/data_memory_we0",
+          "data_mem/wea"
         ]
       },
       "processor_0_error": {
@@ -382,28 +457,18 @@
           "ERROR"
         ]
       },
-      "processor_0_memory_address0": {
+      "processor_0_instr_memory_address0": {
         "ports": [
-          "processor_0/memory_address0",
-          "blk_mem_gen_0/addra"
+          "processor_0/instr_memory_address0",
+          "instr_mem/addra",
+          "equal_1/a",
+          "equal_0/b"
         ]
       },
-      "processor_0_memory_ce0": {
+      "processor_0_instr_memory_ce0": {
         "ports": [
-          "processor_0/memory_ce0",
-          "blk_mem_gen_0/ena"
-        ]
-      },
-      "processor_0_memory_d0": {
-        "ports": [
-          "processor_0/memory_d0",
-          "blk_mem_gen_0/dina"
-        ]
-      },
-      "processor_0_memory_we0": {
-        "ports": [
-          "processor_0/memory_we0",
-          "blk_mem_gen_0/wea"
+          "processor_0/instr_memory_ce0",
+          "instr_mem/ena"
         ]
       },
       "xlconstant_0_dout": {

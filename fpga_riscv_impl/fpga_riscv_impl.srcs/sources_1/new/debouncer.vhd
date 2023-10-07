@@ -36,7 +36,7 @@ end entity;
 
 architecture behave of debouncer is
     signal count : integer range 0 to MAX_COUNT := 0;
-    signal debounced_pin : std_logic := '0';
+    signal debounced_pin : std_logic := '1';
 begin
     process(clk)
     begin

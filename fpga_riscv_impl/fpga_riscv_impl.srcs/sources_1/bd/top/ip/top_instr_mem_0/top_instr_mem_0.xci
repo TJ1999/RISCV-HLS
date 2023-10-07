@@ -1,14 +1,14 @@
 {
   "schema": "xilinx.com:schema:json_instance:1.0",
   "ip_inst": {
-    "xci_name": "top_blk_mem_gen_0_0",
-    "cell_name": "blk_mem_gen_0",
+    "xci_name": "top_instr_mem_0",
+    "cell_name": "data_mem",
     "component_reference": "xilinx.com:ip:blk_mem_gen:8.4",
     "ip_revision": "6",
-    "gen_directory": "../../../../../../fpga_riscv_impl.gen/sources_1/bd/top/ip/top_blk_mem_gen_0_0",
+    "gen_directory": "../../../../../../fpga_riscv_impl.gen/sources_1/bd/top/ip/top_instr_mem_0",
     "parameters": {
       "component_parameters": {
-        "Component_Name": [ { "value": "top_blk_mem_gen_0_0", "resolve_type": "user", "usage": "all" } ],
+        "Component_Name": [ { "value": "top_instr_mem_0", "resolve_type": "user", "usage": "all" } ],
         "Interface_Type": [ { "value": "Native", "resolve_type": "user", "usage": "all" } ],
         "AXI_Type": [ { "value": "AXI4_Full", "resolve_type": "user", "usage": "all" } ],
         "AXI_Slave_Type": [ { "value": "Memory_Slave", "resolve_type": "user", "usage": "all" } ],
@@ -34,7 +34,7 @@
         "Primitive": [ { "value": "8kx2", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "Assume_Synchronous_Clk": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Write_Width_A": [ { "value": "32", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Write_Depth_A": [ { "value": "102400", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "Write_Depth_A": [ { "value": "51200", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Read_Width_A": [ { "value": "32", "resolve_type": "user", "usage": "all" } ],
         "Operating_Mode_A": [ { "value": "WRITE_FIRST", "resolve_type": "user", "usage": "all" } ],
         "Enable_A": [ { "value": "Use_ENA_Pin", "resolve_type": "user", "usage": "all" } ],
@@ -52,7 +52,7 @@
         "register_portb_output_of_softecc": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Pipeline_Stages": [ { "value": "0", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "Load_Init_File": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "Coe_File": [ { "value": "../../../../../../../benchmark_coe/dry2.coe", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "Coe_File": [ { "value": "../../../../../../../benchmark_coe/dry2.data.coe", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Fill_Remaining_Memory_Locations": [ { "value": "true", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Remaining_Memory_Locations": [ { "value": "0", "resolve_type": "user", "usage": "all" } ],
         "Use_RSTA_Pin": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
@@ -98,7 +98,7 @@
         "C_ALGORITHM": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_PRIM_TYPE": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_LOAD_INIT_FILE": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_INIT_FILE_NAME": [ { "value": "top_blk_mem_gen_0_0.mif", "resolve_type": "generated", "usage": "all" } ],
+        "C_INIT_FILE_NAME": [ { "value": "top_instr_mem_0.mif", "resolve_type": "generated", "usage": "all" } ],
         "C_INIT_FILE": [ { "value": "NONE", "resolve_type": "generated", "usage": "all" } ],
         "C_USE_DEFAULT_DATA": [ { "value": "1", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_DEFAULT_DATA": [ { "value": "0", "resolve_type": "generated", "usage": "all" } ],
@@ -113,9 +113,9 @@
         "C_WRITE_MODE_A": [ { "value": "WRITE_FIRST", "resolve_type": "generated", "usage": "all" } ],
         "C_WRITE_WIDTH_A": [ { "value": "32", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_READ_WIDTH_A": [ { "value": "32", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_WRITE_DEPTH_A": [ { "value": "102400", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_READ_DEPTH_A": [ { "value": "102400", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_ADDRA_WIDTH": [ { "value": "17", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_WRITE_DEPTH_A": [ { "value": "51200", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_READ_DEPTH_A": [ { "value": "51200", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_ADDRA_WIDTH": [ { "value": "16", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_HAS_RSTB": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_RST_PRIORITY_B": [ { "value": "CE", "resolve_type": "generated", "usage": "all" } ],
         "C_RSTRAM_B": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
@@ -127,9 +127,9 @@
         "C_WRITE_MODE_B": [ { "value": "WRITE_FIRST", "resolve_type": "generated", "usage": "all" } ],
         "C_WRITE_WIDTH_B": [ { "value": "32", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_READ_WIDTH_B": [ { "value": "32", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_WRITE_DEPTH_B": [ { "value": "102400", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_READ_DEPTH_B": [ { "value": "102400", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_ADDRB_WIDTH": [ { "value": "17", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_WRITE_DEPTH_B": [ { "value": "51200", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_READ_DEPTH_B": [ { "value": "51200", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_ADDRB_WIDTH": [ { "value": "16", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_HAS_MEM_OUTPUT_REGS_A": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_HAS_MEM_OUTPUT_REGS_B": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_HAS_MUX_OUTPUT_REGS_A": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
@@ -154,9 +154,9 @@
         "C_EN_SHUTDOWN_PIN": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_EN_SAFETY_CKT": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_DISABLE_WARN_BHV_RANGE": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "C_COUNT_36K_BRAM": [ { "value": "90", "resolve_type": "generated", "usage": "all" } ],
-        "C_COUNT_18K_BRAM": [ { "value": "2", "resolve_type": "generated", "usage": "all" } ],
-        "C_EST_POWER_SUMMARY": [ { "value": "Estimated Power for IP     :     19.035064 mW", "resolve_type": "generated", "usage": "all" } ]
+        "C_COUNT_36K_BRAM": [ { "value": "43", "resolve_type": "generated", "usage": "all" } ],
+        "C_COUNT_18K_BRAM": [ { "value": "6", "resolve_type": "generated", "usage": "all" } ],
+        "C_EST_POWER_SUMMARY": [ { "value": "Estimated Power for IP     :     17.614386 mW", "resolve_type": "generated", "usage": "all" } ]
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "artix7" } ],
@@ -175,11 +175,11 @@
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
         "IPREVISION": [ { "value": "6" } ],
         "MANAGED": [ { "value": "TRUE" } ],
-        "OUTPUTDIR": [ { "value": "../../../../../../fpga_riscv_impl.gen/sources_1/bd/top/ip/top_blk_mem_gen_0_0" } ],
+        "OUTPUTDIR": [ { "value": "../../../../../../fpga_riscv_impl.gen/sources_1/bd/top/ip/top_instr_mem_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "../../ipshared" } ],
         "SWVERSION": [ { "value": "2023.1.1" } ],
-        "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
+        "SYNTHESISFLOW": [ { "value": "GLOBAL" } ]
       }
     },
     "boundary": {
@@ -187,7 +187,7 @@
         "clka": [ { "direction": "in", "driver_value": "0" } ],
         "ena": [ { "direction": "in", "driver_value": "0" } ],
         "wea": [ { "direction": "in", "size_left": "0", "size_right": "0", "driver_value": "0" } ],
-        "addra": [ { "direction": "in", "size_left": "16", "size_right": "0", "driver_value": "0" } ],
+        "addra": [ { "direction": "in", "size_left": "15", "size_right": "0", "driver_value": "0" } ],
         "dina": [ { "direction": "in", "size_left": "31", "size_right": "0", "driver_value": "0" } ],
         "douta": [ { "direction": "out", "size_left": "31", "size_right": "0" } ]
       },

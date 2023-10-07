@@ -31,3 +31,10 @@ set_property IOSTANDARD LVCMOS33 [get_ports {ERROR[0]}]
 
 set_property PACKAGE_PIN H5 [get_ports LED0]
 set_property IOSTANDARD LVCMOS33 [get_ports LED0]
+
+set_property PACKAGE_PIN R18 [get_ports IO39]
+set_property IOSTANDARD LVCMOS33 [get_ports IO39]
+set_property PACKAGE_PIN P18 [get_ports IO40]
+set_property PACKAGE_PIN N17 [get_ports IO41]
+set_property IOSTANDARD LVCMOS33 [get_ports IO40]
+set_property IOSTANDARD LVCMOS33 [get_ports IO41]
