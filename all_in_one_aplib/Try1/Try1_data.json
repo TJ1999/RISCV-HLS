@@ -92,7 +92,7 @@
     "ClockPeriod": "10",
     "Uncertainty": "2.7",
     "IsCombinational": "0",
-    "II": "3 ~ 6",
+    "II": "3 ~ 7",
     "Latency": "2"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
@@ -258,26 +258,26 @@
         "Latency": {
           "LatencyBest": "2",
           "LatencyAvg": "4",
-          "LatencyWorst": "5",
+          "LatencyWorst": "6",
           "PipelineIIMin": "3",
-          "PipelineIIMax": "6",
-          "PipelineII": "3 ~ 6",
+          "PipelineIIMax": "7",
+          "PipelineII": "3 ~ 7",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "6.514"
+          "Estimate": "6.930"
         },
         "Area": {
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "960",
+          "FF": "964",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "2665",
+          "LUT": "2869",
           "AVAIL_LUT": "63400",
           "UTIL_LUT": "4",
           "URAM": "0",
@@ -292,7 +292,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-10-04 12:00:04 +0200",
+    "Time": "2023-10-09 16:03:47 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

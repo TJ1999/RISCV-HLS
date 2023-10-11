@@ -52,13 +52,25 @@ Therefore, instructions like store and load have been implemented using if case 
 
 Adding the `#pragma HLS ARRAY_PARTITION variable=xreg type=complete` has not made any advances
 
-By trying to change the architecture from von Neumann to Harvard, Latency stays the same.
-
 By trying to pipeline the function using a while loop, latency remains unchanged
 
 ### All-In-One Implementation using arbitrary integer functions and little optimize
 
-In this variation, the source registers are read in the first place. Also the result is stored in a variable and at the end stored in the register.
+In this variation, the source registers are read in the first place. 
+
+The result is stored in a variable and at the end stored in the register. The same mechanism is done with load and store instructions as well as branch instructions.
+
+By trying to pipeline the function using a while loop, latency remains unchanged
+
+### All-In-One Implementation using arbitrary integer functions and little optimize with harvard and loop
+
+In this variation, the harvard architecture has been applied. Unfortunately, this has not further improved performance.
+
+In a following step, a while loop has been applied. But without success. Depending on how the while loop has been applied, Vitis complains about
+> WARNING: [RTGEN 206-101] Port 'processor/error' has no fanin or fanout and is left dangling.
+
+In the synthesized design the error port was not working anymore. In that case however, The number of flip flops and LUTs went down significantly. With some restructure of writing to the error variable the ressource usage and performance is equivilent to no loop.
+
 
 ### Separated
 
@@ -90,35 +102,34 @@ Notes:
 - Rocket Chips are too big and complex to compare them here
 - OoO Chip by Andrew Hanselman offeres no sources
 - PicoRV32I does not execute benchmark due to an memory misalignment trap
+- All benchmarks regardless of architecture take approx. 14.700 million instructions
 
 **100 Mhz:**
 
-| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | Sep hvd | COMET     | PiocRV32I |
-| ------------- | ----- | --------- | ------- | --------- | ------- | --------- | --------- |
-| LOC           | 355   | 369       | 416     | 432       | 462     |           | 3044      |
-| FFs           | 1057  | 795       | 352     | 1567      | 1468    |           | 464       |
-| LUTs          | 2253  | 2104      | 1807    | 2609      | 2960    |           | 1097      |
-| DSPs          | 0     | 0         | 0       | 0         | 0       |           | 0         |
-| est. Power    | 0.246 | 0.244     | 0.227   | 0.233     | 0.229   | Timing    | 0.213     |
-| II            | 6     | 5         | 6       | 5         | 3       | Violation | -         |
-| Latency       | 7     | 6         | 7       | 6         | 7       |           | -         |
-|               |       |           |         |           |         |           |           |
-| dhrystone[^1] | 573   | 640       | 552     | 587       | 1144    |           | 908[^2]   |
-| embench       |       |           |         |           |         |           |           |
+| *Parameter*   | Aio   | Aio aplib | Aio opt | Aio opt hvd | Separated | Sep hvd | COMET     | PiocRV32I |
+| ------------- | ----- | --------- | ------- | ----------- | --------- | ------- | --------- | --------- |
+| LOC           | 338   | 356       | 391     | 404         | 432       | 462     |           | 3044      |
+| FFs           | 1078  | 819       | 437     | 462         | 1567      | 1468    |           | 464       |
+| LUTs          | 2093  | 1868      | 1557    | 1726        | 2609      | 2960    |           | 1097      |
+| DSPs          | 0     | 0         | 0       | 0           | 0         | 0       |           | 0         |
+| est. Power    | 0.232 | 0.218     | 0.234   | 0.222       | 0.233     | 0.229   | Timing    | 0.213     |
+| II            | 6     | 6         | 5       | 5           | 5         | 3       | Violation | -         |
+| Latency       | 7     | 7         | 6       | 6           | 6         | 7       |           | -         |
+|               |       |           |         |             |           |         |           |           |
+| dhrystone[^1] | 608   | 609       | 622     | 623         | 587       | 1144    |           | 908[^2]   |
 
 **50 MHz:**
-| *Parameter*   | Aio   | Aio aplib | Aio opt | Separated | Sep hvd | COMET | PiocRV32I |
-| ------------- | ----- | --------- | ------- | --------- | ------- | ----- | --------- |
-| LOC           | 355   | 369       | 416     | 432       | 462     | ~700  | 3044      |
-| FFs           | 187   | 258       | 239     | 1353      | 1445    | 811   | 464       |
-| LUTs          | 1918  | 1914      | 1845    | 2732      | 2368    | 1818  | 1097      |
-| DSPs          | 0     | 0         | 0       | 0         | 0       | 4     | 0         |
-| est. Power    | 0.231 | 0.222     | 0.238   | 0.221     | 0.205   | 0.228 | 0.204     |
-| II            | 3     | 3         | 3       | 3         | 3       | -     | -         |
-| Latency       | 4     | 4         | 4       | 4         | 6       | -     | -         |
-|               |       |           |         |           |         |       |           |
-| dhrystone[^1] | 870   | 870       | 862     | 855       | 1144    | [^3]  | 908[^2]   |
-| embench       |       |           |         |           |         |       |           |
+| *Parameter*   | Aio   | Aio aplib | Aio opt | Aio opt hvd | Separated | Sep hvd | COMET | PiocRV32I |
+| ------------- | ----- | --------- | ------- | ----------- | --------- | ------- | ----- | --------- |
+| LOC           | 338   | 356       | 391     | 404         | 432       | 462     | ~700  | 3044      |
+| FFs           | 209   | 231       | 313     | 338         | 1353      | 1445    | 811   | 464       |
+| LUTs          | 1863  | 1741      | 1598    | 1694        | 2732      | 2368    | 1818  | 1097      |
+| DSPs          | 0     | 0         | 0       | 0           | 0         | 0       | 4     | 0         |
+| est. Power    | 0.219 | 0.214     | 0.225   | 0.231       | 0.221     | 0.205   | 0.228 | 0.204     |
+| II            | 3     | 3         | 3       | 3           | 3         | 3       | -     | -         |
+| Latency       | 4     | 4         | 4       | 4           | 4         | 6       | -     | -         |
+|               |       |           |         |             |           |         |       |           |
+| dhrystone[^1] | 870   | 870       | 862     | 855         | 855       | 1144    | [^3]  | 908[^2]   |
 
 [^1]: in Dhrystones/Second/Mhz
 

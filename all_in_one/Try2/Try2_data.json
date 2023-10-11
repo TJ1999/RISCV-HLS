@@ -275,12 +275,12 @@
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "301",
+          "FF": "303",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "3778",
+          "LUT": "3947",
           "AVAIL_LUT": "63400",
-          "UTIL_LUT": "5",
+          "UTIL_LUT": "6",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0",
@@ -293,7 +293,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-10-04 11:42:38 +0200",
+    "Time": "2023-10-09 13:33:53 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

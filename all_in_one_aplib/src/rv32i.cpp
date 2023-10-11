@@ -28,6 +28,10 @@ void processor(u32 memory[102400], u1 *error) {
 
   static u1 _error = 0;
 
+  if (_pc % 4) {
+    Error(&_error);
+  }
+
   // fetch 32-bit instruction
   i32 instr = static_cast<u32>(memory[_pc / 4]);
 
@@ -52,7 +56,7 @@ void processor(u32 memory[102400], u1 *error) {
   case 0b011'0111:  // LUI
     xreg[rd] = imm_U;
     break;
-  case 0b001'0111:  // AUI_pc
+  case 0b001'0111:  // AUIPC
     xreg[rd] = imm_U + _pc;
     break;
   case 0b110'1111:  // JAL
@@ -104,30 +108,29 @@ void processor(u32 memory[102400], u1 *error) {
       }
       break;
     default:
-      // error
       Error(&_error);
       break;
     }
     break;
   case 0b0000011: {  // Load
     u32 pos = (xreg[rs1] + imm_I) / 4;
-    u32 offset = ((xreg[rs1] + imm_I) % 4) * 8;
+    u2 offset = xreg[rs1] + imm_I;
     switch (funct3) {
     case 0b000:  // LB
       if (offset == 0) {
         xreg[rd] = static_cast<i8>(memory[pos](7, 0));
-      } else if (offset == 8) {
+      } else if (offset == 1) {
         xreg[rd] = static_cast<i8>(memory[pos](15, 8));
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         xreg[rd] = static_cast<i8>(memory[pos](23, 16));
-      } else if (offset == 24) {
+      } else if (offset == 3) {
         xreg[rd] = static_cast<i8>(memory[pos](31, 24));
       }
       break;
     case 0b001:  // LH
       if (offset == 0) {
         xreg[rd] = static_cast<i16>(memory[pos](15, 0));
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         xreg[rd] = static_cast<i16>(memory[pos](31, 16));
       }
       break;
@@ -137,23 +140,22 @@ void processor(u32 memory[102400], u1 *error) {
     case 0b100:  // LBU
       if (offset == 0) {
         xreg[rd] = static_cast<u8>(memory[pos](7, 0));
-      } else if (offset == 8) {
+      } else if (offset == 1) {
         xreg[rd] = static_cast<u8>(memory[pos](15, 8));
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         xreg[rd] = static_cast<u8>(memory[pos](23, 16));
-      } else if (offset == 24) {
+      } else if (offset == 3) {
         xreg[rd] = static_cast<u8>(memory[pos](31, 24));
       }
       break;
     case 0b101:  // LHU
       if (offset == 0) {
         xreg[rd] = static_cast<u16>(memory[pos](15, 0));
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         xreg[rd] = static_cast<u16>(memory[pos](31, 16));
       }
       break;
     default:
-      // error
       Error(&_error);
       break;
     }
@@ -161,23 +163,23 @@ void processor(u32 memory[102400], u1 *error) {
   }
   case 0b0100011: {  // Store
     u32 pos = (xreg[rs1] + imm_S) / 4;
-    u32 offset = ((xreg[rs1] + imm_S) % 4) * 8;
+    u2 offset = xreg[rs1] + imm_S;
     switch (funct3) {
     case 0b000:  // SB
       if (offset == 0) {
         memory[pos](7, 0) = xreg[rs2];
-      } else if (offset == 8) {
+      } else if (offset == 1) {
         memory[pos](15, 8) = xreg[rs2];
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         memory[pos](23, 16) = xreg[rs2];
-      } else if (offset == 24) {
+      } else if (offset == 3) {
         memory[pos](31, 24) = xreg[rs2];
       }
       break;
     case 0b001:  // SH
       if (offset == 0) {
         memory[pos](15, 0) = xreg[rs2];
-      } else if (offset == 16) {
+      } else if (offset == 2) {
         memory[pos](31, 16) = xreg[rs2];
       }
       break;
@@ -185,7 +187,6 @@ void processor(u32 memory[102400], u1 *error) {
       memory[pos] = xreg[rs2];
       break;
     default:
-      // error
       Error(&_error);
       break;
     }
@@ -223,7 +224,6 @@ void processor(u32 memory[102400], u1 *error) {
       if (funct7 == 0) {
         xreg[rd] = xreg[rs1] << imm_I2;
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -236,13 +236,11 @@ void processor(u32 memory[102400], u1 *error) {
         xreg[rd] = static_cast<i32>(xreg[rs1]) >> imm_I2;
         break;
       default:
-        // error
         Error(&_error);
         break;
       }
       break;
     default:
-      // error
       Error(&_error);
       break;
     }
@@ -260,7 +258,6 @@ void processor(u32 memory[102400], u1 *error) {
         xreg[rd] = xreg[rs1] - xreg[rs2];
         break;
       default:
-        // error
         Error(&_error);
         break;
       }
@@ -269,7 +266,6 @@ void processor(u32 memory[102400], u1 *error) {
       if (funct7 == 0) {
         xreg[rd] = xreg[rs1] << xreg[rs2](4, 0);
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -281,7 +277,6 @@ void processor(u32 memory[102400], u1 *error) {
           xreg[rd] = 0;
         }
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -293,7 +288,6 @@ void processor(u32 memory[102400], u1 *error) {
           xreg[rd] = 0;
         }
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -301,7 +295,6 @@ void processor(u32 memory[102400], u1 *error) {
       if (funct7 == 0) {
         xreg[rd] = xreg[rs1] ^ xreg[rs2];
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -314,7 +307,6 @@ void processor(u32 memory[102400], u1 *error) {
         xreg[rd] = static_cast<i32>(xreg[rs1]) >> xreg[rs2](4, 0);
         break;
       default:
-        // error
         Error(&_error);
         break;
       }
@@ -323,7 +315,6 @@ void processor(u32 memory[102400], u1 *error) {
       if (funct7 == 0) {
         xreg[rd] = xreg[rs1] | xreg[rs2];
       } else {
-        // error
         Error(&_error);
       }
       break;
@@ -331,19 +322,16 @@ void processor(u32 memory[102400], u1 *error) {
       if (funct7 == 0) {
         xreg[rd] = xreg[rs1] & xreg[rs2];
       } else {
-        // error
         Error(&_error);
       }
       break;
     default:
-      // error
       Error(&_error);
       break;
     }
     break;
   case 0b0001111:  // FENCE
     // do nothing
-    Error(&_error);
     break;
   case 0b1110011:  // ECALL / EBRAK
     if (funct12 == 0) {
@@ -355,7 +343,6 @@ void processor(u32 memory[102400], u1 *error) {
     }
     break;
   default:
-    // error
     Error(&_error);
     break;
   }

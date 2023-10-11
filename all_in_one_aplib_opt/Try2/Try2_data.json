@@ -266,16 +266,16 @@
         "Timing": {
           "Target": "20.00",
           "Uncertainty": "5.40",
-          "Estimate": "14.514"
+          "Estimate": "10.155"
         },
         "Area": {
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "309",
+          "FF": "324",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "1976",
+          "LUT": "2444",
           "AVAIL_LUT": "63400",
           "UTIL_LUT": "3",
           "URAM": "0",
@@ -290,7 +290,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-10-04 12:54:23 +0200",
+    "Time": "2023-10-09 17:23:57 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }

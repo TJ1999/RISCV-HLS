@@ -5,6 +5,7 @@
 #include <cstdint>
 
 using u1 = ap_uint<1>;
+using u2 = ap_uint<2>;
 using u3 = ap_uint<3>;
 using u5 = ap_uint<5>;
 using i5 = ap_int<5>;

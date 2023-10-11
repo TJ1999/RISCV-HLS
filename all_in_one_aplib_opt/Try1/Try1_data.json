@@ -68,7 +68,7 @@
           "interface": "error",
           "name": "error",
           "usage": "data",
-          "direction": "out"
+          "direction": "in"
         }]
     }
   },
@@ -82,7 +82,10 @@
       "config_export -vendor=TJ",
       "config_export -version=1.0.0"
     ],
-    "DirectiveTcl": ["set_directive_top processor -name processor"],
+    "DirectiveTcl": [
+      "set_directive_top processor -name processor",
+      "set_directive_top processor -name processor"
+    ],
     "ProfileOption": "0",
     "ProfileType": "none",
     "KernelName": "processor"
@@ -92,8 +95,8 @@
     "ClockPeriod": "10",
     "Uncertainty": "2.7",
     "IsCombinational": "0",
-    "II": "5 ~ 7",
-    "Latency": "4"
+    "II": "undef",
+    "Latency": "undef"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
   "Ipx": {
@@ -198,7 +201,7 @@
       "type": "data",
       "busTypeName": "data",
       "protocol": "ap_none",
-      "mode": "master",
+      "mode": "slave",
       "dataWidth": "1",
       "portMap": {"error": "DATA"},
       "ports": ["error"],
@@ -240,7 +243,7 @@
       "width": "32"
     },
     "error": {
-      "dir": "out",
+      "dir": "in",
       "width": "1",
       "isVector": "true"
     }
@@ -256,30 +259,35 @@
       }},
     "Metrics": {"processor": {
         "Latency": {
-          "LatencyBest": "4",
-          "LatencyAvg": "4",
-          "LatencyWorst": "6",
-          "PipelineIIMin": "5",
-          "PipelineIIMax": "7",
-          "PipelineII": "5 ~ 7",
+          "LatencyBest": "",
+          "LatencyAvg": "",
+          "LatencyWorst": "",
+          "PipelineII": "",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "6.756"
+          "Estimate": "6.514"
         },
+        "Loops": [{
+            "Name": "VITIS_LOOP_31_1",
+            "TripCount": "inf",
+            "Latency": "",
+            "PipelineII": "6",
+            "PipelineDepth": "6"
+          }],
         "Area": {
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "518",
+          "FF": "343",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "2025",
+          "LUT": "1648",
           "AVAIL_LUT": "63400",
-          "UTIL_LUT": "3",
+          "UTIL_LUT": "2",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0",
@@ -292,7 +300,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-10-04 12:52:33 +0200",
+    "Time": "2023-10-10 18:23:08 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }
