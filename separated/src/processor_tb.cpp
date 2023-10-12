@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #include "rv32i.h"
 #include "assert.h"
 #include <iostream>
@@ -7,7 +7,7 @@
 void processor_tick_n(unsigned int times, std::vector<u32> &memory) {
   u1 error = static_cast<u1>(1);
   for (int i = 0; i < times; i++) {
-    processor(memory.data(), error);
+    processor(memory.data(), &error);
   }
   if (error == 1) {
     std::cout << "Error in processor!";

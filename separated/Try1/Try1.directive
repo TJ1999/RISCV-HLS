@@ -5,11 +5,6 @@
                 <option name="name" value="processor"/>
             </pragma>
         </directive>
-        <directive functionName="processor" label="" functionLabel="">
-            <pragma name="TOP">
-                <option name="name" value="processor"/>
-            </pragma>
-        </directive>
     </sourceFile>
 </AutoPilot:ProjectResources>
 

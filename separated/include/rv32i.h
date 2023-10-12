@@ -5,6 +5,7 @@
 #include <cstdint>
 
 using u1 = ap_uint<1>;
+using u2 = ap_uint<2>;
 using u3 = ap_uint<3>;
 using u5 = ap_uint<5>;
 using i5 = ap_int<5>;
@@ -21,8 +22,8 @@ using i21 = ap_int<21>;
 using u32 = ap_uint<32>;
 using i32 = ap_int<32>;
 
-static constexpr std::size_t MEMORY_DEPTH = 102'400;
+static constexpr std::size_t MEMORY_SIZE = 102'400;
 
-void reset_processor ();
-void processor (u32 memory[MEMORY_DEPTH], u1 &o_error);
-void benchmark (bool &finished);
+void reset_processor();
+void processor(u32 *memory, u1 *error);
+void benchmark(bool &finished);
