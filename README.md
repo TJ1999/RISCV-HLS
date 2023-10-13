@@ -105,7 +105,7 @@ Notes:
 - Rocket Chips are too big and complex to compare them here
 - OoO Chip by Andrew Hanselman offeres no sources
 - PicoRV32I does not execute benchmark due to an memory misalignment trap
-- All benchmarks form this papers variations regardless of architecture take approx. 14.700 million instructions
+- All benchmarks form this papers variations regardless of architecture take approx. 14.70 million instructions and have taken 50000 dhrystone runs
 
 **100 Mhz:**
 
@@ -115,9 +115,10 @@ Notes:
 | FFs           | 1078  | 819    | 437     | 462         | 448   | 440     | 1452        |        | 464       |
 | LUTs          | 2093  | 1868   | 1557    | 1726        | 1697  | 1600    | 3980        | Timing | 1097      |
 | DSPs          | 0     | 0      | 0       | 0           | 0     | 0       | 0           | Vio-   | 0         |
-| est. Power    | 0.232 | 0.218  | 0.234   | 0.222       | 0.243 | 0.218   | 0.242       | lation | 0.213     |
-| II            | 6     | 6      | 5       | 5           | 6     | 6       | 3           |        | -         |
-| Latency       | 7     | 7      | 6       | 6           | 7     | 7       | 7           |        | -         |
+| est. P (W)    | 0.232 | 0.218  | 0.234   | 0.222       | 0.243 | 0.218   | 0.242       | lation | 0.213     |
+| II            | 3-7   | 3-7    | 4-6     | 4-6         | 5-7   | 6       | 3           |        | -         |
+| Latency       | 2-6   | 2-6    | 3-5     | 3-5         | 4-6   | 5       | 5           |        | -         |
+| CPI           | 5.6   | 5.6    | 5.5     | 5.5         | 5.8   | 5.9     | 3.0         |        |           |
 |               |       |        |         |             |       |         |             |        |           |
 | dhrystone[^1] | 608   | 609    | 622     | 623         | 587   | 573     | 1134        |        | 908[^2]   |
 
@@ -129,8 +130,9 @@ Notes:
 | LUTs          | 1863  | 1741   | 1598    | 1694        | 1595  | 1545    | 3202        | 1818  | 1097      |
 | DSPs          | 0     | 0      | 0       | 0           | 0     | 0       | 0           | 4     | 0         |
 | est. Power    | 0.219 | 0.214  | 0.225   | 0.231       | 0.216 | 0.213   | 0.229       | 0.228 | 0.204     |
-| II            | 3     | 3      | 3       | 3           | 3     | 4       | 2           | -     | -         |
-| Latency       | 4     | 4      | 4       | 4           | 4     | 5       | 5           | -     | -         |
+| II            | 3-4   | 3-4    | 4       | 4           | 4     | 4       | 2           | -     | -         |
+| Latency       | 2-3   | 2-3    | 3       | 3           | 3     | 3       | 3           | -     | -         |
+| CPI           | 3.9   | 3.9    | 3.9     | 4.0         | 3.9   | 4.0     | 2.0         |       |           |
 |               |       |        |         |             |       |         |             |       |           |
 | dhrystone[^1] | 870   | 870    | 862     | 855         | 862   | 855     | 1698        | [^3]  | 908[^2]   |
 
