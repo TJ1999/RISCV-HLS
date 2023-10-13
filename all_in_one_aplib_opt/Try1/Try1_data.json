@@ -68,7 +68,7 @@
           "interface": "error",
           "name": "error",
           "usage": "data",
-          "direction": "in"
+          "direction": "out"
         }]
     }
   },
@@ -95,8 +95,8 @@
     "ClockPeriod": "10",
     "Uncertainty": "2.7",
     "IsCombinational": "0",
-    "II": "undef",
-    "Latency": "undef"
+    "II": "4 ~ 6",
+    "Latency": "3"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
   "Ipx": {
@@ -201,7 +201,7 @@
       "type": "data",
       "busTypeName": "data",
       "protocol": "ap_none",
-      "mode": "slave",
+      "mode": "master",
       "dataWidth": "1",
       "portMap": {"error": "DATA"},
       "ports": ["error"],
@@ -243,7 +243,7 @@
       "width": "32"
     },
     "error": {
-      "dir": "in",
+      "dir": "out",
       "width": "1",
       "isVector": "true"
     }
@@ -259,35 +259,30 @@
       }},
     "Metrics": {"processor": {
         "Latency": {
-          "LatencyBest": "",
-          "LatencyAvg": "",
-          "LatencyWorst": "",
-          "PipelineII": "",
+          "LatencyBest": "3",
+          "LatencyAvg": "5",
+          "LatencyWorst": "5",
+          "PipelineIIMin": "4",
+          "PipelineIIMax": "6",
+          "PipelineII": "4 ~ 6",
           "PipelineDepth": "",
           "PipelineType": "no"
         },
         "Timing": {
           "Target": "10.00",
           "Uncertainty": "2.70",
-          "Estimate": "6.514"
+          "Estimate": "6.898"
         },
-        "Loops": [{
-            "Name": "VITIS_LOOP_31_1",
-            "TripCount": "inf",
-            "Latency": "",
-            "PipelineII": "6",
-            "PipelineDepth": "6"
-          }],
         "Area": {
           "BRAM_18K": "2",
           "AVAIL_BRAM": "270",
           "UTIL_BRAM": "~0",
-          "FF": "343",
+          "FF": "483",
           "AVAIL_FF": "126800",
           "UTIL_FF": "~0",
-          "LUT": "1648",
+          "LUT": "2512",
           "AVAIL_LUT": "63400",
-          "UTIL_LUT": "2",
+          "UTIL_LUT": "3",
           "URAM": "0",
           "AVAIL_URAM": "0",
           "UTIL_URAM": "0",
@@ -300,7 +295,7 @@
   "GenerateBdFiles": "0",
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2023-10-10 18:23:08 +0200",
+    "Time": "2023-10-13 13:17:07 +0200",
     "ToolName": "vitis_hls",
     "ToolVersion": "2023.1.1"
   }
