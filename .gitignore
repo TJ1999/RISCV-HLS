@@ -1,0 +1,44 @@
+# Directories and Files from Vitis HLS Projects
+*/.apc/
+*/.reference/
+*/.settings/
+*/Debug/
+*/.vitis_hls_log_all.xml
+*/.cproject
+
+# Directories from Vitis HLS Projects for a Solution
+*/*/.autopilot/
+*/*/.debug/
+*/*/.tcls/
+*/*/csim/
+*/*/impl/
+*/*/sim/
+*/*/syn/report/
+
+# Uninteresting generated outputs
+exported_rtls/
+*.log
+
+# Vivado Project
+*/*.cache/
+*/*.gen/
+*/*.hw/
+*/*.ip_user_files/
+*/*.runs/
+*/*.sim/
+*/*.srcs/utils*/
+*/*.log
+
+# Benchmark files
+*.bin
+*.o
+dry2
+dry2o
+dry2r
+
+
+# Playground Vivado projects
+fpga_comet/
+fpga_picorv/
+
+.vscode/
