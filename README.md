@@ -1,5 +1,8 @@
 # RICV-HLS
 
+This repository provides different variations of how a RV32I core can be implemented using HLS.
+The C++ specifications are synthesized using Vitis HLS 2023.1 and implemented using Vivado 2023.1 on a Digilent ARTY A7 Board
+
 ## Commands
 
 To build the embench-iot project:
