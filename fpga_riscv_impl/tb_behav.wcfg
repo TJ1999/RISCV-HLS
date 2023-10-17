@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="284.600 ns"></ZoomStartTime>
-      <ZoomEndTime time="562.040 ns"></ZoomEndTime>
-      <Cursor1Time time="300.000 ns"></Cursor1Time>
+      <ZoomStartTime time="460.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="601.415 ns"></ZoomEndTime>
+      <Cursor1Time time="851.106 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="302"></NameColumnWidth>
-      <ValueColumnWidth column_width="124"></ValueColumnWidth>
+      <ValueColumnWidth column_width="112"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/tb/i_clk" type="logic">
       <obj_property name="ElementShortName">i_clk</obj_property>
       <obj_property name="ObjectShortName">i_clk</obj_property>
@@ -60,12 +60,16 @@
       <obj_property name="ElementShortName">clk_period</obj_property>
       <obj_property name="ObjectShortName">clk_period</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb/dut/top_i/processor_0/instr_memory_q0" type="array">
-      <obj_property name="ElementShortName">instr_memory_q0[31:0]</obj_property>
-      <obj_property name="ObjectShortName">instr_memory_q0[31:0]</obj_property>
+   <wvobject fp_name="/tb/dut/top_i/processor_0/memory_ce0" type="logic">
+      <obj_property name="ElementShortName">memory_ce0</obj_property>
+      <obj_property name="ObjectShortName">memory_ce0</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb/dut/top_i/processor_0/instr_memory_address0" type="array">
-      <obj_property name="ElementShortName">instr_memory_address0[15:0]</obj_property>
-      <obj_property name="ObjectShortName">instr_memory_address0[15:0]</obj_property>
+   <wvobject fp_name="/tb/dut/top_i/processor_0/memory_q0" type="array">
+      <obj_property name="ElementShortName">memory_q0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_q0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb/dut/top_i/processor_0/memory_address0" type="array">
+      <obj_property name="ElementShortName">memory_address0[16:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_address0[16:0]</obj_property>
    </wvobject>
 </wave_config>

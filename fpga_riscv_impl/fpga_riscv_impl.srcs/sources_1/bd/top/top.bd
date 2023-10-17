@@ -6,7 +6,7 @@
       "gen_directory": "../../../../fpga_riscv_impl.gen/sources_1/bd/top",
       "name": "top",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
-      "synth_flow_mode": "None",
+      "synth_flow_mode": "Hierarchical",
       "tool_version": "2023.1.1",
       "validated": "true"
     },
@@ -18,8 +18,8 @@
       "equal_1": "",
       "debouncer_0": "",
       "data_mem": "",
-      "instr_mem": "",
-      "processor_0": ""
+      "processor_0": "",
+      "data_mem1": ""
     },
     "ports": {
       "CLK_100Mhz": {
@@ -73,10 +73,10 @@
             "value": "SINGLE"
           },
           "CLKOUT1_JITTER": {
-            "value": "151.636"
+            "value": "130.958"
           },
           "CLKOUT1_REQUESTED_OUT_FREQ": {
-            "value": "50"
+            "value": "100"
           },
           "CLKOUT2_JITTER": {
             "value": "151.636"
@@ -94,7 +94,7 @@
             "value": "FDBK_AUTO"
           },
           "MMCM_CLKOUT0_DIVIDE_F": {
-            "value": "20.000"
+            "value": "10.000"
           },
           "MMCM_CLKOUT1_DIVIDE": {
             "value": "1"
@@ -180,7 +180,7 @@
                 "value_src": "constant"
               },
               "FREQ_HZ": {
-                "value": "50000000",
+                "value": "100000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -238,7 +238,7 @@
                 "value_src": "constant"
               },
               "FREQ_HZ": {
-                "value": "50000000",
+                "value": "100000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -281,7 +281,7 @@
             "direction": "I",
             "parameters": {
               "FREQ_HZ": {
-                "value": "50000000",
+                "value": "100000000",
                 "value_src": "ip_prop"
               },
               "PHASE": {
@@ -309,16 +309,16 @@
         "inst_hier_path": "data_mem",
         "parameters": {
           "Coe_File": {
-            "value": "../../../../../../../benchmark_coe/dry2.data.coe"
-          },
-          "Collision_Warnings": {
-            "value": "ALL"
+            "value": "../../../../../../../benchmark_coe/dry2_data.coe"
           },
           "Fill_Remaining_Memory_Locations": {
             "value": "true"
           },
           "Load_Init_File": {
             "value": "true"
+          },
+          "Memory_Type": {
+            "value": "Single_Port_RAM"
           },
           "Register_PortA_Output_of_Memory_Primitives": {
             "value": "false"
@@ -331,17 +331,23 @@
           }
         }
       },
-      "instr_mem": {
+      "processor_0": {
+        "vlnv": "TJ:hls:processor:1.0",
+        "xci_name": "top_processor_0_3",
+        "xci_path": "ip\\top_processor_0_3\\top_processor_0_3.xci",
+        "inst_hier_path": "processor_0"
+      },
+      "data_mem1": {
         "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
         "xci_name": "top_data_mem_0",
         "xci_path": "ip\\top_data_mem_0\\top_data_mem_0.xci",
-        "inst_hier_path": "instr_mem",
+        "inst_hier_path": "data_mem1",
         "parameters": {
           "Coe_File": {
             "value": "../../../../../../../benchmark_coe/dry2_instr.coe"
           },
           "Fill_Remaining_Memory_Locations": {
-            "value": "true"
+            "value": "false"
           },
           "Load_Init_File": {
             "value": "true"
@@ -359,12 +365,6 @@
             "value": "Stand_Alone"
           }
         }
-      },
-      "processor_0": {
-        "vlnv": "TJ:hls:processor:1.0",
-        "xci_name": "top_processor_0_2",
-        "xci_path": "ip\\top_processor_0_2\\top_processor_0_2.xci",
-        "inst_hier_path": "processor_0"
       }
     },
     "nets": {
@@ -372,6 +372,14 @@
         "ports": [
           "CLK_100Mhz",
           "clk_wiz_0/clk_in1"
+        ]
+      },
+      "Net": {
+        "ports": [
+          "processor_0/instr_memory_address0",
+          "data_mem1/addra",
+          "equal_1/a",
+          "equal_0/b"
         ]
       },
       "RESET_1": {
@@ -387,13 +395,13 @@
           "equal_0/clk",
           "debouncer_0/clk",
           "data_mem/clka",
-          "instr_mem/clka",
-          "processor_0/ap_clk"
+          "processor_0/ap_clk",
+          "data_mem1/clka"
         ]
       },
       "data_mem1_douta": {
         "ports": [
-          "instr_mem/douta",
+          "data_mem1/douta",
           "processor_0/instr_memory_q0"
         ]
       },
@@ -457,18 +465,10 @@
           "ERROR"
         ]
       },
-      "processor_0_instr_memory_address0": {
-        "ports": [
-          "processor_0/instr_memory_address0",
-          "instr_mem/addra",
-          "equal_1/a",
-          "equal_0/b"
-        ]
-      },
       "processor_0_instr_memory_ce0": {
         "ports": [
           "processor_0/instr_memory_ce0",
-          "instr_mem/ena"
+          "data_mem1/ena"
         ]
       },
       "xlconstant_0_dout": {

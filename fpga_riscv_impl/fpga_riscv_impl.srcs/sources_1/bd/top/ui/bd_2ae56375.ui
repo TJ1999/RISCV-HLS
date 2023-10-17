@@ -1,47 +1,47 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"1.0",
-   "Default View_TopLeft":"-460,-64",
+   "Default View_TopLeft":"-465,-88",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0
 #  -string -flagsOSRD
 preplace port port-id_CLK_100Mhz -pg 1 -lvl 0 -x 0 -y 170 -defaultsOSRD
-preplace port port-id_RESET -pg 1 -lvl 0 -x 0 -y 490 -defaultsOSRD
-preplace port port-id_LED0 -pg 1 -lvl 4 -x 950 -y 300 -defaultsOSRD
-preplace port port-id_IO40 -pg 1 -lvl 4 -x 950 -y 600 -defaultsOSRD
-preplace port port-id_IO41 -pg 1 -lvl 4 -x 950 -y 760 -defaultsOSRD
-preplace port port-id_IO39 -pg 1 -lvl 4 -x 950 -y 280 -defaultsOSRD
-preplace portBus DONE -pg 1 -lvl 4 -x 950 -y 740 -defaultsOSRD
-preplace portBus START -pg 1 -lvl 4 -x 950 -y 580 -defaultsOSRD
-preplace portBus ERROR -pg 1 -lvl 4 -x 950 -y 260 -defaultsOSRD
+preplace port port-id_RESET -pg 1 -lvl 0 -x 0 -y 470 -defaultsOSRD
+preplace port port-id_LED0 -pg 1 -lvl 4 -x 940 -y 460 -defaultsOSRD
+preplace port port-id_IO40 -pg 1 -lvl 4 -x 940 -y 580 -defaultsOSRD
+preplace port port-id_IO41 -pg 1 -lvl 4 -x 940 -y 740 -defaultsOSRD
+preplace port port-id_IO39 -pg 1 -lvl 4 -x 940 -y 440 -defaultsOSRD
+preplace portBus DONE -pg 1 -lvl 4 -x 940 -y 720 -defaultsOSRD
+preplace portBus START -pg 1 -lvl 4 -x 940 -y 560 -defaultsOSRD
+preplace portBus ERROR -pg 1 -lvl 4 -x 940 -y 260 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 110 -y 170 -defaultsOSRD
-preplace inst Prog_stop_addr -pg 1 -lvl 2 -x 450 -y 730 -defaultsOSRD
-preplace inst Prog_start_addr -pg 1 -lvl 2 -x 450 -y 590 -defaultsOSRD
-preplace inst equal_0 -pg 1 -lvl 3 -x 830 -y 760 -defaultsOSRD
-preplace inst equal_1 -pg 1 -lvl 3 -x 830 -y 600 -defaultsOSRD
-preplace inst debouncer_0 -pg 1 -lvl 2 -x 450 -y 480 -defaultsOSRD
-preplace inst data_mem -pg 1 -lvl 3 -x 830 -y 120 -defaultsOSRD
-preplace inst instr_mem -pg 1 -lvl 3 -x 830 -y 370 -defaultsOSRD
+preplace inst Prog_stop_addr -pg 1 -lvl 2 -x 450 -y 710 -defaultsOSRD
+preplace inst Prog_start_addr -pg 1 -lvl 2 -x 450 -y 570 -defaultsOSRD
+preplace inst equal_0 -pg 1 -lvl 3 -x 820 -y 740 -defaultsOSRD
+preplace inst equal_1 -pg 1 -lvl 3 -x 820 -y 580 -defaultsOSRD
+preplace inst debouncer_0 -pg 1 -lvl 2 -x 450 -y 460 -defaultsOSRD
+preplace inst data_mem -pg 1 -lvl 3 -x 820 -y 120 -defaultsOSRD
 preplace inst processor_0 -pg 1 -lvl 2 -x 450 -y 200 -defaultsOSRD
+preplace inst data_mem1 -pg 1 -lvl 3 -x 820 -y 360 -defaultsOSRD
 preplace netloc CLK_100Mhz_1 1 0 1 NJ 170
-preplace netloc RESET_1 1 0 2 NJ 490 NJ
-preplace netloc clk_wiz_0_clk_out1 1 1 2 200 80 690
-preplace netloc data_mem1_douta 1 1 2 210 390 N
-preplace netloc data_mem_douta 1 1 2 230 70 730
-preplace netloc debouncer_0_out_pin 1 1 3 220 320 730 270 930J
-preplace netloc equal_0_z 1 3 1 930 740n
-preplace netloc equal_1_z 1 3 1 930 580n
-preplace netloc processor_0_data_memory_address0 1 2 1 700 80n
+preplace netloc RESET_1 1 0 2 NJ 470 NJ
+preplace netloc clk_wiz_0_clk_out1 1 1 2 200 80 680
+preplace netloc data_mem_douta 1 1 2 210 70 720J
+preplace netloc debouncer_0_out_pin 1 1 3 220 630 720 460 920J
+preplace netloc equal_0_z 1 3 1 920 720n
+preplace netloc equal_1_z 1 3 1 920 560n
 preplace netloc processor_0_data_memory_ce0 1 2 1 N 160
-preplace netloc processor_0_data_memory_d0 1 2 1 720 120n
+preplace netloc processor_0_data_memory_d0 1 2 1 710 120n
 preplace netloc processor_0_data_memory_we0 1 2 1 N 180
 preplace netloc processor_0_error 1 2 2 NJ 260 NJ
-preplace netloc processor_0_instr_memory_address0 1 2 1 680 200n
-preplace netloc processor_0_instr_memory_ce0 1 2 1 710 140n
-preplace netloc xlconstant_0_dout 1 2 1 NJ 730
-preplace netloc xlconstant_1_dout 1 2 1 NJ 590
-levelinfo -pg 1 0 110 450 830 950
-pagesize -pg 1 -db -bbox -sgen -140 0 1080 850
+preplace netloc xlconstant_0_dout 1 2 1 NJ 710
+preplace netloc xlconstant_1_dout 1 2 1 NJ 570
+preplace netloc processor_0_data_memory_address0 1 2 1 690 80n
+preplace netloc Net 1 2 1 670 200n
+preplace netloc data_mem1_douta 1 1 2 230 380 NJ
+preplace netloc processor_0_instr_memory_ce0 1 2 1 700 140n
+levelinfo -pg 1 0 110 450 820 940
+pagesize -pg 1 -db -bbox -sgen -140 0 1070 830
 "
 }
 {

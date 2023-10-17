@@ -4,7 +4,6 @@ ENTRY(_start)
 SECTIONS
 {
     __stack_size = 0x2000;
-    __heap_size = 0x4000;
     PROVIDE(__stack_size = __stack_size);
 
     . = 0x00000000;
@@ -52,7 +51,6 @@ SECTIONS
     .stack :
     {
         . += __stack_size;
-        . += __heap_size;
         . = ALIGN(16);
         PROVIDE(_estack = .);
     }

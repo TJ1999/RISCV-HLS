@@ -34,6 +34,8 @@ hexdump -v -e '1/4 "%08x,\n"' <file>
 | Period for Try1 | 10ns (100Mhz)                       |
 | Period for Try2 | 20ns (50Mhz)                        |
 
+Vitis is generating a memory interface for BRAM memory with a read latency of one clock cycle
+
 ## Variations
 
 ### All-In-One Implementation
@@ -96,7 +98,7 @@ Unfortunately, performance decreased a little, but ressources and power consumpt
 
 Directives like `ARRAY_PARTITION` to the registers and applying a true dual port memory has not further improved performance.
 
-## Separated optimized harvard
+### Separated optimized harvard
 
 By using the harvard architecture latency can be reduced by applying the `ARRAY_PARTITION` directive to the register array. This has not worked with the von neumann architecture.
 
@@ -104,40 +106,35 @@ By using the harvard architecture latency can be reduced by applying the `ARRAY_
 Notes:
 - Rocket Chips are too big and complex to compare them here
 - OoO Chip by Andrew Hanselman offeres no sources
-- PicoRV32I does not execute benchmark due to an memory misalignment trap
 - All benchmarks form this papers variations regardless of architecture take approx. 14.70 million instructions and have taken 50000 dhrystone runs
 
 **100 Mhz:**
 
-| *Parameter*   | Aio   | Aio ap | Aio opt | Aio opt hvd | Sep   | Sep opt | Sep opt hvd | COMET  | PiocRV32I |
-| ------------- | ----- | ------ | ------- | ----------- | ----- | ------- | ----------- | ------ | --------- |
-| LOC           | 338   | 356    | 391     | 404         | 429   | 434     | 447         |        | 3044      |
-| FFs           | 1078  | 819    | 437     | 462         | 448   | 440     | 1452        |        | 464       |
-| LUTs          | 2093  | 1868   | 1557    | 1726        | 1697  | 1600    | 3980        | Timing | 1097      |
-| DSPs          | 0     | 0      | 0       | 0           | 0     | 0       | 0           | Vio-   | 0         |
-| est. P (W)    | 0.232 | 0.218  | 0.234   | 0.222       | 0.243 | 0.218   | 0.242       | lation | 0.213     |
-| II            | 3-7   | 3-7    | 4-6     | 4-6         | 5-7   | 6       | 3           |        | -         |
-| Latency       | 2-6   | 2-6    | 3-5     | 3-5         | 4-6   | 5       | 5           |        | -         |
-| CPI           | 5.6   | 5.6    | 5.5     | 5.5         | 5.8   | 5.9     | 3.0         |        |           |
-|               |       |        |         |             |       |         |             |        |           |
-| dhrystone[^1] | 608   | 609    | 622     | 623         | 587   | 573     | 1134        |        | 908[^2]   |
+| *Parameter*   | Aio   | Aio ap | Aio opt | Aio opt hvd | Sep   | Sep opt | Sep opt hvd | PiocRV32I |
+| ------------- | ----- | ------ | ------- | ----------- | ----- | ------- | ----------- | --------- |
+| LOC           | 338   | 356    | 391     | 404         | 429   | 434     | 447         | 3044      |
+| FFs           | 1078  | 819    | 437     | 462         | 448   | 440     | 1452        | 446       |
+| LUTs          | 2093  | 1868   | 1557    | 1726        | 1697  | 1600    | 3980        | 1226      |
+| est. P (W)    | 0.232 | 0.218  | 0.234   | 0.222       | 0.243 | 0.218   | 0.242       | 0.231     |
+| II            | 3-7   | 3-7    | 4-6     | 4-6         | 5-7   | 6       | 3           | -         |
+| Latency       | 2-6   | 2-6    | 3-5     | 3-5         | 4-6   | 5       | 5           | -         |
+| CPI           | 5.6   | 5.6    | 5.5     | 5.5         | 5.8   | 5.9     | 3.0         | 5.3       |
+|               |       |        |         |             |       |         |             |           |
+| dhrystone[^1] | 608   | 609    | 622     | 623         | 587   | 573     | 1134        | 647       |
 
 **50 MHz:**
-| *Parameter*   | Aio   | Aio ap | Aio opt | Aio opt hvd | Sep   | Sep opt | Sep opt hvd | COMET | PiocRV32I |
-| ------------- | ----- | ------ | ------- | ----------- | ----- | ------- | ----------- | ----- | --------- |
-| LOC           | 338   | 356    | 391     | 404         | 429   | 434     | 447         | ~700  | 3044      |
-| FFs           | 209   | 231    | 313     | 338         | 283   | 307     | 1334        | 811   | 464       |
-| LUTs          | 1863  | 1741   | 1598    | 1694        | 1595  | 1545    | 3202        | 1818  | 1097      |
-| DSPs          | 0     | 0      | 0       | 0           | 0     | 0       | 0           | 4     | 0         |
-| est. Power    | 0.219 | 0.214  | 0.225   | 0.231       | 0.216 | 0.213   | 0.229       | 0.228 | 0.204     |
-| II            | 3-4   | 3-4    | 4       | 4           | 4     | 4       | 2           | -     | -         |
-| Latency       | 2-3   | 2-3    | 3       | 3           | 3     | 3       | 3           | -     | -         |
-| CPI           | 3.9   | 3.9    | 3.9     | 4.0         | 3.9   | 4.0     | 2.0         |       |           |
-|               |       |        |         |             |       |         |             |       |           |
-| dhrystone[^1] | 870   | 870    | 862     | 855         | 862   | 855     | 1698        | [^3]  | 908[^2]   |
+| *Parameter*   | Aio   | Aio ap | Aio opt | Aio opt hvd | Sep   | Sep opt | Sep opt hvd | PiocRV32I | COMET   |
+| ------------- | ----- | ------ | ------- | ----------- | ----- | ------- | ----------- | --------- | ------- |
+| LOC           | 338   | 356    | 391     | 404         | 429   | 434     | 447         | 3044      | ~700    |
+| FFs           | 209   | 231    | 313     | 338         | 283   | 307     | 1334        | 446       | 811     |
+| LUTs          | 1863  | 1741   | 1598    | 1694        | 1595  | 1545    | 3202        | 1220      | 1818    |
+| est. Power    | 0.219 | 0.214  | 0.225   | 0.231       | 0.216 | 0.213   | 0.229       | 0.219     | 0.288   |
+| II            | 3-4   | 3-4    | 4       | 4           | 4     | 4       | 2           | -         | -       |
+| Latency       | 2-3   | 2-3    | 3       | 3           | 3     | 3       | 3           | -         | -       |
+| CPI           | 3.9   | 3.9    | 3.9     | 4.0         | 3.9   | 4.0     | 2.0         | 5.3       | 1.9[^2] |
+|               |       |        |         |             |       |         |             |           |         |
+| dhrystone[^1] | 870   | 870    | 862     | 855         | 862   | 855     | 1698        | 649       | -       |
 
 [^1]: in Dhrystones/Second/Mhz
 
-[^2]: according to GitHub: with enabled `ENABLE_FAST_MUL`, `ENABLE_DIV`, and `BARREL_SHIFTER` options with CPI ~4.1 or CPI ~5.232 without look-ahead memory and only 0.305 DMIPS/MHz or 536 Drystones/s. Pico Processor synthesises but behaves not as expected. Jumping to a function results in too far jumps. Therefore, the benchmark could not be executed
-
-[^3]: only provides 8192 byte data mem hard coded
+[^2]: according to their paper
