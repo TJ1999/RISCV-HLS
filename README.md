@@ -3,7 +3,25 @@
 This repository provides different variations of how a RV32I core can be implemented using HLS.
 The C++ specifications are synthesized using Vitis HLS 2023.1 and implemented using Vivado 2023.1 on a Digilent ARTY A7 Board
 
-## Commands
+## Repo structure
+
+The Vitis HLS RV32I projects are in directories (more information can be found below):
+- *all_in_one*
+- *all_in_one_aplib*
+- *all_in_one_aplib_opt*
+- *all_in_one_aplib_opt_harvard*
+- *all_in_one_harvard*
+- *separated*
+- *separated_opt*
+- *separated_opt_harvard*
+
+Benchmark binaries as coe files for Vivado's memory IPs can be found in *benchmark_coe*
+
+Dhrystone source files can be found in *dhrystone*
+
+A reference Vivado Project can be found in *fpga_riscv_impl*
+
+## Helpful Commands
 
 To build the embench-iot project:
 
@@ -29,7 +47,7 @@ To make a `coe` file for Vivado:
 hexdump -v -e '1/4 "%08x,\n"' <file>
 ```
 
-## Settings
+## Vitis HLS Settings
 
 | Setting         | Value                               |
 | --------------- | ----------------------------------- |
@@ -131,7 +149,7 @@ Notes:
 | LOC           | 338   | 356    | 391     | 404         | 429   | 434     | 447         | 3044      | ~700    |
 | FFs           | 209   | 231    | 313     | 338         | 283   | 307     | 1334        | 446       | 811     |
 | LUTs          | 1863  | 1741   | 1598    | 1694        | 1595  | 1545    | 3202        | 1220      | 1818    |
-| est. Power    | 0.219 | 0.214  | 0.225   | 0.231       | 0.216 | 0.213   | 0.229       | 0.219     | 0.288   |
+| est. Power    | 0.219 | 0.214  | 0.225   | 0.231       | 0.216 | 0.213   | 0.229       | 0.219     | 0.228   |
 | II            | 3-4   | 3-4    | 4       | 4           | 4     | 4       | 2           | -         | -       |
 | Latency       | 2-3   | 2-3    | 3       | 3           | 3     | 3       | 3           | -         | -       |
 | CPI           | 3.9   | 3.9    | 3.9     | 4.0         | 3.9   | 4.0     | 2.0         | 5.3       | 1.9[^2] |
